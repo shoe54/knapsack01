@@ -3,6 +3,7 @@ package com.lingo.redmart.totechallenge.dp;
 import static org.junit.Assert.assertEquals;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import org.junit.BeforeClass;
@@ -11,7 +12,6 @@ import org.junit.Test;
 import com.lingo.redmart.totechallenge.Product;
 import com.lingo.redmart.totechallenge.TestUtil;
 import com.lingo.redmart.totechallenge.Tote;
-import com.lingo.redmart.totechallenge.dp.DynamicProgramming;
 
 
 public class DynamicProgrammingTest {
@@ -174,4 +174,23 @@ public class DynamicProgrammingTest {
 		dp.maximizeMyShopping(products, t);
 		assertEquals(TestUtil.setOfProducts(p1,p2,p3,p4,p5,p7,p11,p16,p17,p18,p19,p21), t.getProducts());
 	}
+
+	/**
+	 * Test with no products and just 1 product
+	 */
+	@Test
+	public void testMaximizeMyShopping05() {
+		List<Product> products = new ArrayList<>();
+		Tote t = new Tote(1, 10, 1); // volume: 10
+
+		dp.maximizeMyShopping(products, t);
+		assertEquals(Collections.EMPTY_SET, t.getProducts());
+	
+		Product p1 = new Product(1, 20, 5, 2, 1, 1); // volume: 10
+		products.add(p1);
+		t.removeAllProducts();
+		dp.maximizeMyShopping(products, t);
+		assertEquals(TestUtil.setOfProducts(p1), t.getProducts());
+	}
+
 }

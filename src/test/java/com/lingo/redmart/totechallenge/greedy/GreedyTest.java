@@ -3,6 +3,7 @@ package com.lingo.redmart.totechallenge.greedy;
 import static org.junit.Assert.assertEquals;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import org.junit.BeforeClass;
@@ -11,7 +12,6 @@ import org.junit.Test;
 import com.lingo.redmart.totechallenge.Product;
 import com.lingo.redmart.totechallenge.TestUtil;
 import com.lingo.redmart.totechallenge.Tote;
-import com.lingo.redmart.totechallenge.greedy.Greedy;
 
 
 public class GreedyTest {
@@ -92,5 +92,23 @@ public class GreedyTest {
 		g.maximizeMyShopping(products, t);
 		assertEquals(TestUtil.setOfProducts(p1), t.getProducts());
 	
+	}
+
+	/**
+	 * Test with no products and just 1 product
+	 */
+	@Test
+	public void testMaximizeMyShopping03() {
+		List<Product> products = new ArrayList<>();
+		Tote t = new Tote(1, 10, 1); // volume: 10
+
+		g.maximizeMyShopping(products, t);
+		assertEquals(Collections.EMPTY_SET, t.getProducts());
+	
+		Product p1 = new Product(1, 20, 5, 2, 1, 1); // volume: 10
+		products.add(p1);
+		t.removeAllProducts();
+		g.maximizeMyShopping(products, t);
+		assertEquals(TestUtil.setOfProducts(p1), t.getProducts());
 	}
 }
