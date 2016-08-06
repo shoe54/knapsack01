@@ -1,7 +1,8 @@
-package com.lingo.redmart.totechallenge.dp;
+package com.lingo.redmart.totechallenge;
 
 /**
- * Immutable. Represents the running total price and weight of the DP algorithm
+ * Immutable. Represents the running total price and weight
+ * 
  * @author Shu
  *
  */
@@ -10,11 +11,18 @@ public class PriceWeightTuple implements Comparable<PriceWeightTuple> {
 	final int totalWeight; // grams
 
 	public static final PriceWeightTuple ZERO = new PriceWeightTuple(0, 0);
-	
+
 	public PriceWeightTuple(int totalPrice, int totalWeight) {
 		super();
 		this.totalPrice = totalPrice;
 		this.totalWeight = totalWeight;
+	}
+
+	public PriceWeightTuple add(PriceWeightTuple toAdd) {
+		return new PriceWeightTuple(
+				totalPrice + toAdd.totalPrice, 
+				totalWeight	+ toAdd.totalWeight
+		);
 	}
 
 	@Override
@@ -43,8 +51,8 @@ public class PriceWeightTuple implements Comparable<PriceWeightTuple> {
 	}
 
 	/**
-	 * A PriceWeightTuple A is larger than B if A's price is larger than B. If price
-	 * is tied, then A is larger if A's weight is lower than B
+	 * A PriceWeightTuple A is larger than B if A's price is larger than B. If
+	 * price is tied, then A is larger if A's weight is lower than B
 	 */
 	@Override
 	public int compareTo(PriceWeightTuple o) {
@@ -54,7 +62,7 @@ public class PriceWeightTuple implements Comparable<PriceWeightTuple> {
 		// Tied on price. Lower weight has more "value"
 		return o.totalWeight - totalWeight;
 	}
-	
+
 	public int getTotalPrice() {
 		return totalPrice;
 	}

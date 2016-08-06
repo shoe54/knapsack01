@@ -1,10 +1,12 @@
-package com.lingo.redmart.totechallenge.dp;
+package com.lingo.redmart.totechallenge;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 import org.junit.BeforeClass;
 import org.junit.Test;
+
+import com.lingo.redmart.totechallenge.PriceWeightTuple;
 
 public class PriceWeightTupleTest {
 	static PriceWeightTuple p;
@@ -14,6 +16,22 @@ public class PriceWeightTupleTest {
 		p = new PriceWeightTuple(100, 200);
 	}
 
+	@Test
+	public void testAdd() {
+		assertEquals(
+			new PriceWeightTuple(300, 450), 
+			p.add(new PriceWeightTuple(200, 250)
+		));
+		assertEquals(
+			new PriceWeightTuple(0, 10), 
+			p.add(new PriceWeightTuple(-100, -190)
+		));
+		assertEquals(
+			p, 
+			p.add(PriceWeightTuple.ZERO
+		));
+	}
+	
 	@Test
 	public void testCompareTo() {
 		assertEquals(0, p.compareTo(new PriceWeightTuple(100, 200)));

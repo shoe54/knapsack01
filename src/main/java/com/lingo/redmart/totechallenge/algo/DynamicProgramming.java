@@ -1,7 +1,8 @@
-package com.lingo.redmart.totechallenge.dp;
+package com.lingo.redmart.totechallenge.algo;
 
 import java.util.List;
 
+import com.lingo.redmart.totechallenge.PriceWeightTuple;
 import com.lingo.redmart.totechallenge.Product;
 import com.lingo.redmart.totechallenge.Solution;
 import com.lingo.redmart.totechallenge.Tote;
@@ -54,8 +55,8 @@ public class DynamicProgramming extends Solution {
 					if (Pi.getVolume() > c)
 						S[i][c] = didNotInclude;
 					else {
-						int didIncludeTotalPrice = Pi.getPrice() + S[i-1][c-Pi.getVolume()].totalPrice;  
-						int didIncludeTotalWeight = Pi.getWeight() + S[i-1][c-Pi.getVolume()].totalWeight;
+						int didIncludeTotalPrice = Pi.getPrice() + S[i-1][c-Pi.getVolume()].getTotalPrice();  
+						int didIncludeTotalWeight = Pi.getWeight() + S[i-1][c-Pi.getVolume()].getTotalWeight();
 						PriceWeightTuple didInclude = new PriceWeightTuple(didIncludeTotalPrice, didIncludeTotalWeight);
 						int cmp = didNotInclude.compareTo(didInclude);
 						S[i][c] = cmp > 0 ? didNotInclude : didInclude;

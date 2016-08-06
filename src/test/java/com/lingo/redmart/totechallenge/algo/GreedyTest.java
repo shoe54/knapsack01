@@ -1,4 +1,4 @@
-package com.lingo.redmart.totechallenge.greedy;
+package com.lingo.redmart.totechallenge.algo;
 
 import static org.junit.Assert.assertEquals;
 
@@ -12,6 +12,7 @@ import org.junit.Test;
 import com.lingo.redmart.totechallenge.Product;
 import com.lingo.redmart.totechallenge.TestUtil;
 import com.lingo.redmart.totechallenge.Tote;
+import com.lingo.redmart.totechallenge.algo.Greedy;
 
 
 public class GreedyTest {

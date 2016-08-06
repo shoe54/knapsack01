@@ -1,4 +1,4 @@
-package com.lingo.redmart.totechallenge.greedy;
+package com.lingo.redmart.totechallenge.algo;
 
 import java.util.Comparator;
 import java.util.List;
