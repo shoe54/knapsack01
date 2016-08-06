@@ -12,8 +12,9 @@ import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
 
 import com.lingo.redmart.totechallenge.Solution.DoesProductFitIntoEmptyTote;
-import com.lingo.redmart.totechallenge.dp.DynamicProgramming;
-import com.lingo.redmart.totechallenge.greedy.Greedy;
+import com.lingo.redmart.totechallenge.algo.BruteForce;
+import com.lingo.redmart.totechallenge.algo.DynamicProgramming;
+import com.lingo.redmart.totechallenge.algo.Greedy;
 
 public class App {
 
@@ -41,7 +42,18 @@ public class App {
 			"/" + tote.getVolume()
 		);
 		tote.removeAllProducts();
-	}
+
+		/* Don't run this with the supplied data set unless you are running
+		 * on a quantum supercomputer :)
+		new BruteForce().maximizeMyShopping(products, tote);
+		System.out.println(
+			"Brute Force solution (cents): " + tote.getTotalPrice() +
+			", Occupied space (cm3): " + tote.getOccupiedVolume() +
+			"/" + tote.getVolume()
+		);
+		tote.removeAllProducts();
+		*/
+}
 
 	/**
 	 * Create list of Products from CSV file and optionally filter by a Predicate.
