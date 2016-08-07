@@ -41,7 +41,8 @@ public class DynamicProgramming extends Solution {
 		//
 		// Note that S[i-1][c] effectively means the product was not included in the solution
 		
-		PriceWeightTuple S[][] = new PriceWeightTuple[products.size()+1][tote.getVolume()+1];
+		@SuppressWarnings("unchecked")
+		PriceWeightTuple<Integer> S[][] = new PriceWeightTuple[products.size()+1][tote.getVolume()+1];
 		
 		Product Pi = null; // P(i), aka products.get(i-1)
 		for (int i = 0; i <= products.size(); i++) {
@@ -51,13 +52,13 @@ public class DynamicProgramming extends Solution {
 				if (i == 0 || c == 0)
 					S[i][c] = PriceWeightTuple.ZERO;
 				else {
-					PriceWeightTuple didNotInclude = S[i-1][c];
+					PriceWeightTuple<Integer> didNotInclude = S[i-1][c];
 					if (Pi.getVolume() > c)
 						S[i][c] = didNotInclude;
 					else {
-						int didIncludeTotalPrice = Pi.getPrice() + S[i-1][c-Pi.getVolume()].getTotalPrice();  
-						int didIncludeTotalWeight = Pi.getWeight() + S[i-1][c-Pi.getVolume()].getTotalWeight();
-						PriceWeightTuple didInclude = new PriceWeightTuple(didIncludeTotalPrice, didIncludeTotalWeight);
+						int didIncludeTotalPrice = Pi.getPrice() + S[i-1][c-Pi.getVolume()].getPrice();  
+						int didIncludeTotalWeight = Pi.getWeight() + S[i-1][c-Pi.getVolume()].getWeight();
+						PriceWeightTuple<Integer> didInclude = new PriceWeightTuple<Integer>(didIncludeTotalPrice, didIncludeTotalWeight);
 						int cmp = didNotInclude.compareTo(didInclude);
 						S[i][c] = cmp > 0 ? didNotInclude : didInclude;
 					}

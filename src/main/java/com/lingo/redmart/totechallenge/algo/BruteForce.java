@@ -9,8 +9,9 @@ import com.lingo.redmart.totechallenge.Solution;
 import com.lingo.redmart.totechallenge.Tote;
 
 /**
- * Brute Force approach with back tracking which allows the algorithm to stop continuing 
- * to explore unfeasible solutions
+ * Brute Force approach with no back tracking. Implemented as a search thru bit string
+ * space, not as a search thru a state space tree. See BranchAndBound for a state space
+ * tree implementation
  * 
  * O(n * (2 pow n))
  * 
@@ -34,10 +35,10 @@ public class BruteForce extends Solution {
 	 */
 	@Override
 	public void maximizeMyShopping(List<Product> products, Tote tote) {
-		PriceWeightTuple combinationValue;
+		PriceWeightTuple<Integer> combinationValue;
 		int combinationVolume;
 		BigInteger bestCombination = null;
-		PriceWeightTuple bestCombinationValue = PriceWeightTuple.ZERO;
+		PriceWeightTuple<Integer> bestCombinationValue = PriceWeightTuple.ZERO;
 		BigInteger numberOfPossibleCombinations = BigInteger.valueOf(2)
 				.pow(products.size()).subtract(BigInteger.ONE);
 
@@ -54,10 +55,10 @@ public class BruteForce extends Solution {
 					// System.out.println("Bit " + bitIndex + " is set");
 					Product productAtBit = products.get(bitIndex);
 					combinationValue = combinationValue.add(
-						new PriceWeightTuple(productAtBit.getPrice(), productAtBit.getWeight()));
+						productAtBit.getPrice(), productAtBit.getWeight());
 					combinationVolume += productAtBit.getVolume();
 					if (combinationVolume > tote.getVolume())
-						// Solution is not feasible already at this point. Back track
+						// Solution is not feasible already at this point. Skip this combination
 						continue combinationIteration; 
 				}
 			}

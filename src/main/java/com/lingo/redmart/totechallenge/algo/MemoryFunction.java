@@ -25,7 +25,8 @@ public class MemoryFunction extends Solution {
 		// P(i): is the i'th product
 		// c: 0 <= c <= tote.getVolume()
 		
-		PriceWeightTuple S[][] = new PriceWeightTuple[products.size()+1][tote.getVolume()+1];
+		@SuppressWarnings("unchecked")
+		PriceWeightTuple<Integer> S[][] = new PriceWeightTuple[products.size()+1][tote.getVolume()+1];
 		for (int i = 0; i < S.length; i++)
 			for (int c = 0; c < S[i].length; c++)
 				S[i][c] = null;
@@ -52,8 +53,8 @@ public class MemoryFunction extends Solution {
 		}	
 	}
 
-	PriceWeightTuple memoryFunction(int i, int c, PriceWeightTuple S[][], List<Product> products) {
-		PriceWeightTuple value = S[i][c];
+	PriceWeightTuple<Integer> memoryFunction(int i, int c, PriceWeightTuple<Integer> S[][], List<Product> products) {
+		PriceWeightTuple<Integer> value = S[i][c];
 		
 		if (value == null) {
 			Product Pi = products.get(i-1);
@@ -62,12 +63,12 @@ public class MemoryFunction extends Solution {
 				value = memoryFunction(i-1, c, S, products);
 			}
 			else {
-				PriceWeightTuple didNotInclude = memoryFunction(i-1, c, S, products);
-				PriceWeightTuple previousIncluded = memoryFunction(i-1, c-productVolume, S, products);
-				PriceWeightTuple didInclude = 
-					new PriceWeightTuple(
-							Pi.getPrice() + previousIncluded.getTotalPrice(),
-							Pi.getWeight() + previousIncluded.getTotalWeight());
+				PriceWeightTuple<Integer> didNotInclude = memoryFunction(i-1, c, S, products);
+				PriceWeightTuple<Integer> previousIncluded = memoryFunction(i-1, c-productVolume, S, products);
+				PriceWeightTuple<Integer> didInclude = 
+					new PriceWeightTuple<Integer>(
+							Pi.getPrice() + previousIncluded.getPrice(),
+							Pi.getWeight() + previousIncluded.getWeight());
 				int cmp = didNotInclude.compareTo(didInclude);
 				value = cmp > 0 ? didNotInclude : didInclude;
 			}

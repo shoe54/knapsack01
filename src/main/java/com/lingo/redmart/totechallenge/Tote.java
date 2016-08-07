@@ -21,7 +21,7 @@ public class Tote extends Cuboid {
 		return products.stream().collect(Collectors.summingInt(Product::getVolume));
 	}
 
-	int getTotalPrice() {
+	public int getTotalPrice() {
 		return products.stream().collect(Collectors.summingInt(Product::getPrice));
 	}
 

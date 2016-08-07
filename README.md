@@ -6,14 +6,15 @@ In response to RedMart's Millionth's Customer Prize challenge at http://geeks.re
 Implements the following approaches for solving the problem:
 * Greedy
 * Dynamic Programming
+* Memory Function
 * Brute Force (for reference only since it theoretically provides the optimal solution but is not feasible to run on such a large data set)
 
-There are other approaches which aren't implemented such as Memory Functions, Branch and Bound, and Genetic Algorithm.
+There are other approaches or combination of approaches which aren't implemented such as Genetic Algorithm, Divide and Conquer + DP.
 
 ## Pre-requisites
 * Java 8
 * Maven 3.x
-* Enough memory to run this Java console application with the -Xmx5120m and -Xss4m parameters (required for the Dynamic Programming and Memory Function algorithms respectively)
+* Enough memory to run this Java console application with the -Xmx5120m and -Xss8m parameters (required for the Dynamic Programming and Memory Function algorithms respectively)
 
 ## Building
 

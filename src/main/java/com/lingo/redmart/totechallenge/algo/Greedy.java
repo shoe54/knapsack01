@@ -6,7 +6,6 @@ import java.util.List;
 import com.lingo.redmart.totechallenge.Product;
 import com.lingo.redmart.totechallenge.Solution;
 import com.lingo.redmart.totechallenge.Tote;
-import com.lingo.redmart.totechallenge.Solution.PriceToVolumeRatioComparator;
 
 /**
  * Greedy algorithm
