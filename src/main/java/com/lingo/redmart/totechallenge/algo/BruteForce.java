@@ -9,7 +9,11 @@ import com.lingo.redmart.totechallenge.Solution;
 import com.lingo.redmart.totechallenge.Tote;
 
 /**
+ * Brute Force approach with back tracking which allows the algorithm to stop continuing 
+ * to explore unfeasible solutions
+ * 
  * O(n * (2 pow n))
+ * 
  * @author Shu
  *
  */
@@ -53,7 +57,8 @@ public class BruteForce extends Solution {
 						new PriceWeightTuple(productAtBit.getPrice(), productAtBit.getWeight()));
 					combinationVolume += productAtBit.getVolume();
 					if (combinationVolume > tote.getVolume())
-						continue combinationIteration;
+						// Solution is not feasible already at this point. Back track
+						continue combinationIteration; 
 				}
 			}
 		

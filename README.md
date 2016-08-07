@@ -13,7 +13,7 @@ There are other approaches which aren't implemented such as Memory Functions, Br
 ## Pre-requisites
 * Java 8
 * Maven 3.x
-* Enough memory to run this Java console application with the -Xmx5120m parameter (required for the Dynamic Programming algorithm)
+* Enough memory to run this Java console application with the -Xmx5120m and -Xss4m parameters (required for the Dynamic Programming and Memory Function algorithms respectively)
 
 ## Building
 
