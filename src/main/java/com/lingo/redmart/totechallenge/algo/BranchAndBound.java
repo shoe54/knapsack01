@@ -60,9 +60,11 @@ public class BranchAndBound extends Solver {
 		/** The upper bound value on this Node */
 		PriceWeightTuple<Double> bound;
 		
-		/** The nodes from above this Node in the tree. Is used to track which products are included in a search result */
+		/** The nodes from above this Node in the tree. Is used to gather the products that 
+		 * are included in a search result */
 		Node parent;
 		
+		/** Is this node's corresponding product included in this branch of the tree? */
 		boolean included = false;
 
 		public static final Node ZERO = new Node(0,PriceWeightTuple.ZERO,0,null); 
