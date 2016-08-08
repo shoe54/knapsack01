@@ -1,10 +1,8 @@
 package com.lingo.redmart.totechallenge.algo;
 
 import java.util.Collections;
-import java.util.HashSet;
 import java.util.List;
 import java.util.PriorityQueue;
-import java.util.Set;
 
 import com.lingo.redmart.totechallenge.PriceWeightTuple;
 import com.lingo.redmart.totechallenge.Product;
@@ -12,25 +10,29 @@ import com.lingo.redmart.totechallenge.Solver;
 import com.lingo.redmart.totechallenge.Tote;
 
 /**
- * Best-first search Branch and Bound implementation. The Price-Weight value object 
- * serves as the algorithm's bound. Like Brute Force, B and B provides the most optimum 
+ * Best-first search Branch and Bound implementation. The PriceWeight value object 
+ * is used as the algorithm's upper bound value. I delegate to the PriceWeight object to 
+ * determine what is considered "better" or "more valuable", e.g. higher price first 
+ * followed by lower weight first. Like Brute Force, B and B provides the most optimum 
  * solution. Unlike Brute Force, it has the intelligence to avoid searching thru 
- * unpromising branches on the tree. This can give the algorithm a huge time cost savings 
+ * unpromising branches of the tree. This can give the algorithm a huge time cost savings 
  * depending on the nature of the input data.
  * 
- * At any point on the tree, the Node's volume is the total of its own volume and the volume
+ * At any point on the tree, a Node's volume is the total of its own volume and the volume
  * of all its parent Nodes that are considered included in the search result. The Node's 
- * bound is the maximum possible Price-Weight value obtainable by greedily including Products 
+ * bound is the maximum possible PriceWeight value obtainable by greedily including Products 
  * from the rest of the products list (while it still fits the tote). The bound allows the 
- * fractional inclusion of a product since we are interested in calculating the maximum 
- * possible value to serve as an upper bound.
+ * fractional inclusion of a product since we are interested in calculating the 
+ * mathematically largest value to serve as an upper bound, even if it isn't
+ * realizable due to the 0/1 constraints of the problem. The algorithm can then use the
+ * upper bound to exclude unpromising branches from being searched. 
  * 
  * Promising branches are branches where the Node at the start of that branch has a volume 
- * less than the tote volume and the bound is more than the maximum Node value encountered
+ * less than the tote volume and the bound is greater than the maximum Node value encountered
  * so far when traversing the search space.
  * 
  * The PriorityQueue allows searching the solution space in order of best likely (but not
- * guaranteed) fit first. We are using the bound value to determine best likely fit.
+ * guaranteed best) fit first. The bound value is used to determine best likely fit. 
  * 
  * @author Shu
  *
@@ -63,8 +65,7 @@ public class BranchAndBound extends Solver {
 		
 		boolean included = false;
 
-		public static final Node ZERO = 
-			new Node(0,PriceWeightTuple.ZERO,0,null); 
+		public static final Node ZERO = new Node(0,PriceWeightTuple.ZERO,0,null); 
 
 		public Node(int level, PriceWeightTuple<Integer> value, int volume, Node parent) {
 			this.level = level;
@@ -125,14 +126,12 @@ public class BranchAndBound extends Solver {
 				// Should we update maxValue?
 				if (u.volume <= tote.getVolume() && u.value.compareTo(best.value) > 0) {
 					best = u;
-					//u.products.add(product);
 					u.included = true;
 				}
 				
 				u.bound = bound(u, tote, products);
 				// Is the node promising?
 				if (u.bound.compareTo(best.value) > 0) {
-					//u.products.add(product);
 					u.included = true;
 					q.offer(u);
 				}
@@ -154,8 +153,6 @@ public class BranchAndBound extends Solver {
 				tote.addProduct(products.get(trace.level-1));
 			trace = trace.parent;
 		}
-		//for (Product p : best.products)
-		//	tote.addProduct(p);
 	}
 
 	/**
