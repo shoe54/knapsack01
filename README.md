@@ -1,7 +1,8 @@
 # totechallenge
-In response to a programming challenge.
 
-*tl;dr*: After building via `mvn package`, `cd` to the `target` directory and run `java -jar totechallange-0.0.1-SNAPSHOT-jar-with-dependencies.jar .\classes\products.csv BranchAndBound` to get the answer to the challenge.
+In response to the programming challenge at http://geeks.redmart.com/2015/10/26/1000000th-customer-prize-another-programming-challenge/
+
+tl;dr: After building via `mvn package`, `cd` to the `target` directory and run `java -jar totechallange-0.0.1-SNAPSHOT-jar-with-dependencies.jar .\classes\products.csv BranchAndBound` to get the answer to the challenge.
 
 
 ## Description
