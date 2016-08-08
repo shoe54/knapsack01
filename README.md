@@ -19,7 +19,7 @@ There are other possible approaches or combination of approaches such as Genetic
 ## Pre-requisites
 * Java 8
 * Maven 3.x
-* Enough memory to run this Java console application with the -Xmx5120m and -Xss8m parameters if you want to run Dynamic Programming or Memory Function algorithms. The -Xss option is required only for Memory Function.
+* Enough memory to run this Java console application with the -Xmx5120m and -Xss8m parameters if you want to run the Dynamic Programming or Memory Function algorithms. The -Xss option is required only for Memory Function.
 
 ## Building
 
