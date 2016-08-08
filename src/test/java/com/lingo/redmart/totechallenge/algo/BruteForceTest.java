@@ -42,7 +42,7 @@ public class BruteForceTest {
 		products.add(p6);
 		products.add(p7);
 
-		bf.maximizeMyShopping(products, t);
+		bf.doMaximizeMyShopping(products, t);
 		assertEquals(TestUtil.setOfProducts(p1), t.getProducts());
 	}
 
@@ -61,7 +61,7 @@ public class BruteForceTest {
 		products.add(p3);
 		products.add(p4);
 
-		bf.maximizeMyShopping(products, t);
+		bf.doMaximizeMyShopping(products, t);
 		assertEquals(TestUtil.setOfProducts(p2,p4), t.getProducts());
 	}
 
@@ -79,7 +79,7 @@ public class BruteForceTest {
 		products.add(p1);
 		products.add(p2);
 
-		bf.maximizeMyShopping(products, t);
+		bf.doMaximizeMyShopping(products, t);
 		assertEquals(TestUtil.setOfProducts(p1), t.getProducts());
 		
 		t.removeAllProducts();
@@ -87,7 +87,7 @@ public class BruteForceTest {
 		products.add(p2);
 		products.add(p1);
 		
-		bf.maximizeMyShopping(products, t);
+		bf.doMaximizeMyShopping(products, t);
 		assertEquals(TestUtil.setOfProducts(p1), t.getProducts());
 	}
 	
@@ -145,7 +145,7 @@ public class BruteForceTest {
 		products.add(p21);
 		products.add(p22);
 
-		bf.maximizeMyShopping(products, t);
+		bf.doMaximizeMyShopping(products, t);
 		assertEquals(TestUtil.setOfProducts(p1,p2,p3,p4,p5,p7,p11,p16,p17,p18,p19,p21), t.getProducts());
 	}
 
@@ -157,13 +157,13 @@ public class BruteForceTest {
 		List<Product> products = new ArrayList<>();
 		Tote t = new Tote(1, 10, 1); // volume: 10
 
-		bf.maximizeMyShopping(products, t);
+		bf.doMaximizeMyShopping(products, t);
 		assertEquals(Collections.EMPTY_SET, t.getProducts());
 	
 		Product p1 = new Product(1, 20, 5, 2, 1, 1); // volume: 10
 		products.add(p1);
 		t.removeAllProducts();
-		bf.maximizeMyShopping(products, t);
+		bf.doMaximizeMyShopping(products, t);
 		assertEquals(TestUtil.setOfProducts(p1), t.getProducts());
 	}
 

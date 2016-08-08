@@ -22,7 +22,7 @@ public class Greedy extends Solution {
 	 * @param tote
 	 */
 	@Override
-	public void maximizeMyShopping(List<Product> products, Tote tote) {
+	protected void doMaximizeMyShopping(List<Product> products, Tote tote) {
 		// Sort products by value (price to volume ratio descending). On a value tie,
 		// sort by volume descending. On a value and volume tie, sort by weight
 		// ascending. The most valuable products will appear first in the list. 

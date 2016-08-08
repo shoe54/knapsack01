@@ -15,7 +15,7 @@ public class DynamicProgramming extends Solution {
 	 * @param tote
 	 */
 	@Override
-	public void maximizeMyShopping(List<Product> products, Tote tote) {
+	protected void doMaximizeMyShopping(List<Product> products, Tote tote) {
 		// Where:
 		// i: 1 <= i <= products.size()
 		// v(i): is the volume of the i'th product

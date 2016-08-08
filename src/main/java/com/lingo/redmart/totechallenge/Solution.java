@@ -1,5 +1,7 @@
 package com.lingo.redmart.totechallenge;
 
+import java.time.Duration;
+import java.time.Instant;
 import java.util.Comparator;
 import java.util.List;
 import java.util.function.Predicate;
@@ -9,8 +11,6 @@ import java.util.function.Predicate;
  * it could deal with more abstract forms (perhaps Item and Pool respectively) so
  * that we can use the Solution on other applications of the same problem, e.g.
  * assigning resources to tasks (Item=Task and Resources=Pool)
- * 
- * Other improvements would be to time the maximize method invocation
  * 
  * @author Shu
  *
@@ -56,9 +56,25 @@ public abstract class Solution {
 	}
 	
 	/**
+	 * Return time taken in milliseconds
+	 * Note: Can be generalized for not just shopping challenges
+	 * 
+	 * @param products
+	 * @param tote
+	 * @return
+	 */
+	public Duration maximizeMyShopping(List<Product> products, Tote tote) {
+		Instant start = Instant.now();
+		
+		doMaximizeMyShopping(products, tote);
+		
+		return Duration.between(start, Instant.now());		
+	}
+	
+	/**
 	 * Note: Can be generalized for not just shopping challenges
 	 * @param products
 	 * @param tote
 	 */
-	public abstract void maximizeMyShopping(List<Product> products, Tote tote);
+	protected abstract void doMaximizeMyShopping(List<Product> products, Tote tote);
 }

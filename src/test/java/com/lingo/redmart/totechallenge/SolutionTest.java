@@ -20,7 +20,7 @@ public class SolutionTest {
 	public static void setUpBeforeClass() throws Exception {
 		s = new Solution() {
 			@Override
-			public void maximizeMyShopping(List<Product> products, Tote tote) {}
+			public void doMaximizeMyShopping(List<Product> products, Tote tote) {}
 		};
 	}
 	

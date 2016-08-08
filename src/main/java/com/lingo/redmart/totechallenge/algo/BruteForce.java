@@ -10,8 +10,7 @@ import com.lingo.redmart.totechallenge.Tote;
 
 /**
  * Brute Force approach with no back tracking. Implemented as a search thru bit string
- * space, not as a search thru a state space tree. See BranchAndBound for a state space
- * tree implementation
+ * space, not as a search thru a state space tree.
  * 
  * O(n * (2 pow n))
  * 
@@ -22,7 +21,9 @@ public class BruteForce extends Solution {
 	/**
 	 * Iterate thru all possible combinations of products in the tote. A
 	 * combination is represented as a series of bits where 0 means the product
-	 * is not included and 1 means the product is included.
+	 * is not included and 1 means the product is included. A BigInteger is used
+	 * to hold this series of bits since it can hold and operate on a large number
+	 * if bits
 	 * 
 	 * We keep track of which combination has the highest value. At the end of
 	 * the iteration this gives us the best solution possible.
@@ -34,7 +35,7 @@ public class BruteForce extends Solution {
 	 * @param tote
 	 */
 	@Override
-	public void maximizeMyShopping(List<Product> products, Tote tote) {
+	protected void doMaximizeMyShopping(List<Product> products, Tote tote) {
 		PriceWeightTuple<Integer> combinationValue;
 		int combinationVolume;
 		BigInteger bestCombination = null;

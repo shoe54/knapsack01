@@ -49,19 +49,19 @@ public class GreedyTest {
 		products.add(p4);
 
 		t = new Tote(20, 30, 25); // volume: 21000
-		g.maximizeMyShopping(products, t);
+		g.doMaximizeMyShopping(products, t);
 		assertEquals(TestUtil.setOfProducts(p1,p2,p3,p4,p5,p6,p7), t.getProducts());
 		
 		t = new Tote(1, 10, 554); // volume: 5540
-		g.maximizeMyShopping(products, t);
+		g.doMaximizeMyShopping(products, t);
 		assertEquals(TestUtil.setOfProducts(p1,p2,p3), t.getProducts());
 
 		t = new Tote(1, 10, 553); // volume: 5530
-		g.maximizeMyShopping(products, t);
+		g.doMaximizeMyShopping(products, t);
 		assertEquals(TestUtil.setOfProducts(p1,p2,p7), t.getProducts());
 
 		t = new Tote(1, 10, 555); // volume: 5550
-		g.maximizeMyShopping(products, t);
+		g.doMaximizeMyShopping(products, t);
 		assertEquals(TestUtil.setOfProducts(p1,p2,p3), t.getProducts());
 	}
 	
@@ -90,7 +90,7 @@ public class GreedyTest {
 		products.add(p6);
 		products.add(p4);
 
-		g.maximizeMyShopping(products, t);
+		g.doMaximizeMyShopping(products, t);
 		assertEquals(TestUtil.setOfProducts(p1), t.getProducts());
 	
 	}
@@ -103,13 +103,13 @@ public class GreedyTest {
 		List<Product> products = new ArrayList<>();
 		Tote t = new Tote(1, 10, 1); // volume: 10
 
-		g.maximizeMyShopping(products, t);
+		g.doMaximizeMyShopping(products, t);
 		assertEquals(Collections.EMPTY_SET, t.getProducts());
 	
 		Product p1 = new Product(1, 20, 5, 2, 1, 1); // volume: 10
 		products.add(p1);
 		t.removeAllProducts();
-		g.maximizeMyShopping(products, t);
+		g.doMaximizeMyShopping(products, t);
 		assertEquals(TestUtil.setOfProducts(p1), t.getProducts());
 	}
 }

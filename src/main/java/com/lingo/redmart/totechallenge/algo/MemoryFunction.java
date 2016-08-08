@@ -15,11 +15,8 @@ import com.lingo.redmart.totechallenge.Tote;
  */
 public class MemoryFunction extends Solution {
 
-	/**
-	 * 
-	 */
 	@Override
-	public void maximizeMyShopping(List<Product> products, Tote tote) {
+	protected void doMaximizeMyShopping(List<Product> products, Tote tote) {
 		// Where:
 		// i: 1 <= i <= products.size()
 		// P(i): is the i'th product
@@ -53,6 +50,14 @@ public class MemoryFunction extends Solution {
 		}	
 	}
 
+	/**
+	 * Similar recurrence relation as DP algo
+	 * @param i
+	 * @param c
+	 * @param S
+	 * @param products
+	 * @return
+	 */
 	PriceWeightTuple<Integer> memoryFunction(int i, int c, PriceWeightTuple<Integer> S[][], List<Product> products) {
 		PriceWeightTuple<Integer> value = S[i][c];
 		

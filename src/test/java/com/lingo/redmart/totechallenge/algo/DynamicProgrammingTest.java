@@ -58,7 +58,7 @@ public class DynamicProgrammingTest {
 		products.add(p6);
 		products.add(p7);
 
-		dp.maximizeMyShopping(products, t);
+		dp.doMaximizeMyShopping(products, t);
 		assertEquals(TestUtil.setOfProducts(p6,p7), t.getProducts());
 	}
 
@@ -88,7 +88,7 @@ public class DynamicProgrammingTest {
 		products.add(p3);
 		products.add(p4);
 
-		dp.maximizeMyShopping(products, t);
+		dp.doMaximizeMyShopping(products, t);
 		assertEquals(TestUtil.setOfProducts(p2,p4), t.getProducts());
 	}
 
@@ -106,7 +106,7 @@ public class DynamicProgrammingTest {
 		products.add(p1);
 		products.add(p2);
 
-		dp.maximizeMyShopping(products, t);
+		dp.doMaximizeMyShopping(products, t);
 		assertEquals(TestUtil.setOfProducts(p1), t.getProducts());
 		
 		t.removeAllProducts();
@@ -114,7 +114,7 @@ public class DynamicProgrammingTest {
 		products.add(p2);
 		products.add(p1);
 		
-		dp.maximizeMyShopping(products, t);
+		dp.doMaximizeMyShopping(products, t);
 		assertEquals(TestUtil.setOfProducts(p1), t.getProducts());
 	}
 
@@ -172,7 +172,7 @@ public class DynamicProgrammingTest {
 		products.add(p21);
 		products.add(p22);
 
-		dp.maximizeMyShopping(products, t);
+		dp.doMaximizeMyShopping(products, t);
 		assertEquals(TestUtil.setOfProducts(p1,p2,p3,p4,p5,p7,p11,p16,p17,p18,p19,p21), t.getProducts());
 	}
 
@@ -184,13 +184,13 @@ public class DynamicProgrammingTest {
 		List<Product> products = new ArrayList<>();
 		Tote t = new Tote(1, 10, 1); // volume: 10
 
-		dp.maximizeMyShopping(products, t);
+		dp.doMaximizeMyShopping(products, t);
 		assertEquals(Collections.EMPTY_SET, t.getProducts());
 	
 		Product p1 = new Product(1, 20, 5, 2, 1, 1); // volume: 10
 		products.add(p1);
 		t.removeAllProducts();
-		dp.maximizeMyShopping(products, t);
+		dp.doMaximizeMyShopping(products, t);
 		assertEquals(TestUtil.setOfProducts(p1), t.getProducts());
 	}
 
