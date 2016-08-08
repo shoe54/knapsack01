@@ -30,6 +30,8 @@ There are other possible approaches or combination of approaches such as Genetic
     cd ./target
     java -Xmx5120m -Xss8m -jar totechallange-0.0.1-SNAPSHOT-jar-with-dependencies.jar <csv file path> [algorithm]
 
-Where algorithm is one of `Greedy`, `DynamicProgramming`, `MemoryFunction`, `BranchAndBound`, or `BruteForce`. If you run BruteForce you won't get to see the results. If algorithm is omitted, all algorithms are run except BruteForce.
+Where `algorithm` is one of `Greedy`, `DynamicProgramming`, `MemoryFunction`, `BranchAndBound`, or `BruteForce`. If you run BruteForce you won't get to see the results. If algorithm is omitted, all algorithms are run except BruteForce.
 
-You can use .\classes\products.csv as the file path if running from the `target` directory.
+You can use .\classes\products.csv as the CSV file path if running from the `target` directory.
+
+See notes in Pre-requisites section about whether you need to include the `-Xmx` and `-Xss` options.
