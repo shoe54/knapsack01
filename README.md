@@ -6,15 +6,15 @@ In response to a programming challenge.
 
 ## Description
 
-Implements the following approaches for solving the challenge:
+Implements the following approaches:
 
-* Greedy
+* Greedy - example of an approximate optimization
 * Dynamic Programming
 * Memory Function
-* Brute Force - for reference only since it theoretically provides the optimal value but is not feasible to run on such a large data set.
-* Branch and Bound - like Brute Force provides the optimal value but with a potentially lesser time complexity, and in the case of this challenge's data set is indeed a very significant improvement over Brute Force, allowing the optimal value to be arrived upon in under 30 minutes.
+* Brute Force - for reference only since it is not feasible to run to completion on such a large data set.
+* Branch and Bound
 
-There are other possible approaches or combination of approaches such as Genetic Algorithm, Divide and Conquer + DP which aren't implemented.
+There are other approximation approaches such as Genetic Algorithm, Monte Carlo, and randomized heuristics which are not implemented.
 
 ## Pre-requisites
 * Java 8

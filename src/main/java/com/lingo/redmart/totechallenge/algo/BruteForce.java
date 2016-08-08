@@ -9,8 +9,8 @@ import com.lingo.redmart.totechallenge.Solver;
 import com.lingo.redmart.totechallenge.Tote;
 
 /**
- * Brute Force approach with no back tracking. Implemented as a search thru bit string
- * space, not as a search thru a state space tree.
+ * Brute Force approach with no back tracking. Implemented as a search through bit string
+ * space, not as a search through a state space tree.
  * 
  * O(n * (2 pow n))
  * 

@@ -7,13 +7,15 @@ import com.lingo.redmart.totechallenge.Product;
 import com.lingo.redmart.totechallenge.Solver;
 import com.lingo.redmart.totechallenge.Tote;
 
+/**
+ * DP provides the global optimum solution
+ * 
+ * Time complexity is O(n * tote volume)
+ * 
+ * @author Shu
+ *
+ */
 public class DynamicProgramming extends Solver {
-	/**
-	 * Time complexity is O(n * tote volume)
-	 * 
-	 * @param products
-	 * @param tote
-	 */
 	@Override
 	protected void doMaximizeMyShopping(List<Product> products, Tote tote) {
 		// Where:

@@ -13,7 +13,7 @@ import com.lingo.redmart.totechallenge.Tote;
  * Best-first search Branch and Bound implementation. The PriceWeight value object 
  * is used as the algorithm's upper bound value. I delegate to the PriceWeight object to 
  * determine what is considered "better" or "more valuable", e.g. higher price first 
- * followed by lower weight first. Like Brute Force, B and B provides the most optimum 
+ * followed by lower weight first. Like Brute Force, B and B provides the global optimum 
  * solution. Unlike Brute Force, it has the intelligence to avoid searching thru 
  * unpromising branches of the tree. This can give the algorithm a huge time cost savings 
  * depending on the nature of the input data.
