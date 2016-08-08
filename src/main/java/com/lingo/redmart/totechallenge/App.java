@@ -14,7 +14,7 @@ import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
 
-import com.lingo.redmart.totechallenge.Solution.DoesProductFitIntoEmptyTote;
+import com.lingo.redmart.totechallenge.Solver.DoesProductFitIntoEmptyTote;
 import com.lingo.redmart.totechallenge.algo.BranchAndBound;
 import com.lingo.redmart.totechallenge.algo.DynamicProgramming;
 import com.lingo.redmart.totechallenge.algo.Greedy;
@@ -27,14 +27,14 @@ public class App {
 	}
 
 	void letsGoShopping(String productsCSVFilePath, 
-			List<Class<? extends Solution>> shoppingAlgos, Tote tote)
+			List<Class<? extends Solver>> shoppingAlgos, Tote tote)
 			throws IOException, InstantiationException, IllegalAccessException {
 		// Convert CSV to list of Products
 		List<Product> products = readProductsFromCSV(
 				productsCSVFilePath, new DoesProductFitIntoEmptyTote(tote));
 
 		// Run the shopping algorithms
-		for (Class<? extends Solution> shoppingAlgo : shoppingAlgos) {
+		for (Class<? extends Solver> shoppingAlgo : shoppingAlgos) {
 			System.out.println("Running " + shoppingAlgo.getSimpleName() + " algorithm. Please wait...");
 			Duration timeTaken = shoppingAlgo.newInstance().maximizeMyShopping(products, tote);
 			System.out.println(
@@ -96,14 +96,14 @@ public class App {
 				System.err.println("Specify CSV filepath as the first command line parameter");
 				return;
 			}		
-			List<Class<? extends Solution>> shoppingAlgos;
+			List<Class<? extends Solver>> shoppingAlgos;
 			if (args.length >= 2) {
 				// Algorithm to run was specified as second command line parameter
-				Class<? extends Solution> shoppingAlgo = (Class<? extends Solution>) Class.forName("com.lingo.redmart.totechallenge.algo." + args[1]);
-				shoppingAlgos = Arrays.<Class<? extends Solution>>asList(shoppingAlgo);
+				Class<? extends Solver> shoppingAlgo = (Class<? extends Solver>) Class.forName("com.lingo.redmart.totechallenge.algo." + args[1]);
+				shoppingAlgos = Arrays.<Class<? extends Solver>>asList(shoppingAlgo);
 			} else {
 				// Algorithm not specified in command line. Run all except BruteForce
-				shoppingAlgos = Arrays.<Class<? extends Solution>>asList(
+				shoppingAlgos = Arrays.<Class<? extends Solver>>asList(
 					Greedy.class, 
 					DynamicProgramming.class, 
 					MemoryFunction.class, 

@@ -4,13 +4,13 @@ import java.util.Collections;
 import java.util.List;
 
 import com.lingo.redmart.totechallenge.Product;
-import com.lingo.redmart.totechallenge.Solution;
+import com.lingo.redmart.totechallenge.Solver;
 import com.lingo.redmart.totechallenge.Tote;
 
 /**
  * Greedy algorithm
  */
-public class Greedy extends Solution {
+public class Greedy extends Solver {
 	/**
 	 * Put the most valuable products into tote until it fills up or can't
 	 * fit any more. The most valuable product is one with the highest price

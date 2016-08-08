@@ -4,10 +4,10 @@ import java.util.List;
 
 import com.lingo.redmart.totechallenge.PriceWeightTuple;
 import com.lingo.redmart.totechallenge.Product;
-import com.lingo.redmart.totechallenge.Solution;
+import com.lingo.redmart.totechallenge.Solver;
 import com.lingo.redmart.totechallenge.Tote;
 
-public class DynamicProgramming extends Solution {
+public class DynamicProgramming extends Solver {
 	/**
 	 * Time complexity is O(n * tote volume)
 	 * 

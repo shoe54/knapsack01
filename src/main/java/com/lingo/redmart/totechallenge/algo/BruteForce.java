@@ -5,7 +5,7 @@ import java.util.List;
 
 import com.lingo.redmart.totechallenge.PriceWeightTuple;
 import com.lingo.redmart.totechallenge.Product;
-import com.lingo.redmart.totechallenge.Solution;
+import com.lingo.redmart.totechallenge.Solver;
 import com.lingo.redmart.totechallenge.Tote;
 
 /**
@@ -17,7 +17,7 @@ import com.lingo.redmart.totechallenge.Tote;
  * @author Shu
  *
  */
-public class BruteForce extends Solution {
+public class BruteForce extends Solver {
 	/**
 	 * Iterate thru all possible combinations of products in the tote. A
 	 * combination is represented as a series of bits where 0 means the product

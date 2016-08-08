@@ -10,15 +10,15 @@ import java.util.List;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import com.lingo.redmart.totechallenge.Solution.DoesProductFitIntoEmptyTote;
-import com.lingo.redmart.totechallenge.Solution.PriceToVolumeRatioComparator;
+import com.lingo.redmart.totechallenge.Solver.DoesProductFitIntoEmptyTote;
+import com.lingo.redmart.totechallenge.Solver.PriceToVolumeRatioComparator;
 
-public class SolutionTest {
-	static Solution s;
+public class SolverTest {
+	static Solver s;
 
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
-		s = new Solution() {
+		s = new Solver() {
 			@Override
 			public void doMaximizeMyShopping(List<Product> products, Tote tote) {}
 		};

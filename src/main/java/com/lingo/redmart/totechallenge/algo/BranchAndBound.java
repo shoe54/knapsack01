@@ -8,7 +8,7 @@ import java.util.Set;
 
 import com.lingo.redmart.totechallenge.PriceWeightTuple;
 import com.lingo.redmart.totechallenge.Product;
-import com.lingo.redmart.totechallenge.Solution;
+import com.lingo.redmart.totechallenge.Solver;
 import com.lingo.redmart.totechallenge.Tote;
 
 /**
@@ -35,7 +35,7 @@ import com.lingo.redmart.totechallenge.Tote;
  * @author Shu
  *
  */
-public class BranchAndBound extends Solution {
+public class BranchAndBound extends Solver {
 	
 	/**
 	 * A Node that is evaluated and fed into the Priority Queue if promising.

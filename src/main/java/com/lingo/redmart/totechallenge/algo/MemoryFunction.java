@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.lingo.redmart.totechallenge.PriceWeightTuple;
 import com.lingo.redmart.totechallenge.Product;
-import com.lingo.redmart.totechallenge.Solution;
+import com.lingo.redmart.totechallenge.Solver;
 import com.lingo.redmart.totechallenge.Tote;
 
 /**
@@ -13,7 +13,7 @@ import com.lingo.redmart.totechallenge.Tote;
  * @author Shu
  *
  */
-public class MemoryFunction extends Solution {
+public class MemoryFunction extends Solver {
 
 	@Override
 	protected void doMaximizeMyShopping(List<Product> products, Tote tote) {

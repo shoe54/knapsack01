@@ -7,15 +7,15 @@ import java.util.List;
 import java.util.function.Predicate;
 
 /**
- * Note: Solution can be generalized. Instead of dealing with Product and Tote
+ * Note: Solver can be further generalized. Instead of dealing with Product and Tote
  * it could deal with more abstract forms (perhaps Item and Pool respectively) so
- * that we can use the Solution on other applications of the same problem, e.g.
+ * that we can use the Solver on other applications of the same problem, e.g.
  * assigning resources to tasks (Item=Task and Resources=Pool)
  * 
  * @author Shu
  *
  */
-public abstract class Solution {
+public abstract class Solver {
 	
 	/**
 	 * Convenience class to determine if Product should be allowed in Tote based

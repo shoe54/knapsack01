@@ -8,7 +8,7 @@ import java.util.List;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import com.lingo.redmart.totechallenge.Solution.DoesProductFitIntoEmptyTote;
+import com.lingo.redmart.totechallenge.Solver.DoesProductFitIntoEmptyTote;
 
 public class AppTest {
 	static App a;
