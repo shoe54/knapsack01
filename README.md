@@ -18,9 +18,9 @@ Implements the following approaches:
 There are other approximation approaches such as Genetic Algorithm, Monte Carlo, and randomized heuristics which are not implemented.
 
 ## Pre-requisites
-* Java 8
+* Java 8 (must be 64-bit if you want to run Dynamic Programming or Memory Function algorithms)
 * Maven 3.x
-* Enough memory to run this Java console application with the -Xmx5120m and -Xss8m parameters if you want to run the Dynamic Programming or Memory Function algorithms. The -Xss option is required only for Memory Function.
+* Enough memory to run this Java console application with the -Xmx6144m and -Xss8m parameters if you want to run the Dynamic Programming or Memory Function algorithms. The -Xss option is required only for Memory Function. More heap space improves the performance of these algorithms. 
 
 ## Building
 
@@ -29,10 +29,15 @@ There are other approximation approaches such as Genetic Algorithm, Monte Carlo,
 ## Running
 
     cd ./target
-    java -Xmx5120m -Xss8m -jar totechallange-0.0.1-SNAPSHOT-jar-with-dependencies.jar <csv file path> [algorithm]
+    java -Xmx6144m -Xss8m -jar totechallange-0.0.1-SNAPSHOT-jar-with-dependencies.jar <csv file path> [algorithm]
 
 Where `algorithm` is one of `Greedy`, `DynamicProgramming`, `MemoryFunction`, `BranchAndBound`, or `BruteForce`. If you run BruteForce you won't get to see the results. If algorithm is omitted, all algorithms are run except BruteForce.
 
 You can use .\classes\products.csv as the CSV file path if running from the `target` directory.
 
 See notes in Pre-requisites section about whether you need to include the `-Xmx` and `-Xss` options.
+
+## Changelog
+
+* 0.0.2-SNAPSHOT: I previously interpreted the language *"...fit into the tote both individually and together by total volume.."* to mean *...fit into the tote both individually by volume and...* . On hindsight it probably meant *...fit into the tote both individually by dimensions and...*. Corrected my program logic accordingly.
+* 0.0.1-SNAPSHOT: Submitted to RedMart.

@@ -44,6 +44,7 @@ public class App {
 			System.out.println("Product ids in tote: " + tote.getProducts().stream().map(p -> p.id).collect(Collectors.toList()));
 			System.out.println("Sum of product ids in tote: " + tote.getProducts().stream().mapToInt(p -> p.id).sum());
 			System.out.println("Time taken: " + timeTaken);
+			System.out.println("");
 			tote.removeAllProducts();
 		}
 	}
@@ -64,7 +65,7 @@ public class App {
 		File csvData = new File(csvPathname);
 		CSVParser parser = CSVParser.parse(csvData, Charset.defaultCharset(),
 				CSVFormat.RFC4180);
-		ArrayList<Product> products = new ArrayList<>(19634); // For the purposes of this challenge
+		ArrayList<Product> products = new ArrayList<>(17933); // For the purposes of this challenge
 															  // I know the number of filtered 
 															  // records, so I can avoid the costs 
 															  // of resizing the ArrayList

@@ -23,10 +23,13 @@ public class SolverTest {
 			public void doMaximizeMyShopping(List<Product> products, Tote tote) {}
 		};
 	}
-	
+
+	/**
+	 * Test checking by volume only
+	 */
 	@Test
-	public void testDoesProductFitIntoEmptyTote() {
-		DoesProductFitIntoEmptyTote filter = new DoesProductFitIntoEmptyTote(new Tote(50, 40, 30));
+	public void testDoesProductFitIntoEmptyTote01() {
+		DoesProductFitIntoEmptyTote filter = new DoesProductFitIntoEmptyTote(new Tote(50, 40, 30), false);
 		assertTrue(filter.test(new Product(1, 1, 50, 40, 30, 1)));
 		assertTrue(filter.test(new Product(1, 1, 40, 50, 30, 1)));
 		assertTrue(filter.test(new Product(1, 1, 40, 40, 30, 1)));
@@ -39,6 +42,24 @@ public class SolverTest {
 		assertFalse(filter.test(new Product(1, 1, 40, 40, 40, 1)));
 	}
 	
+	/**
+	 * Test checking by dimensions
+	 */
+	@Test
+	public void testDoesProductFitIntoEmptyTote02() {
+		DoesProductFitIntoEmptyTote filter = new DoesProductFitIntoEmptyTote(new Tote(50, 40, 30), true);
+		assertTrue(filter.test(new Product(1, 1, 50, 40, 30, 1)));
+		assertTrue(filter.test(new Product(1, 1, 40, 50, 30, 1)));
+		assertTrue(filter.test(new Product(1, 1, 40, 40, 30, 1)));
+		assertTrue(filter.test(new Product(1, 1, 50, 30, 30, 1)));
+		assertTrue(filter.test(new Product(1, 1, 50, 40, 20, 1)));
+		assertFalse(filter.test(new Product(1, 1, 60, 40, 20, 1)));
+		assertFalse(filter.test(new Product(1, 1, 51, 40, 30, 1)));
+		assertFalse(filter.test(new Product(1, 1, 50, 41, 30, 1)));
+		assertFalse(filter.test(new Product(1, 1, 50, 40, 31, 1)));
+		assertFalse(filter.test(new Product(1, 1, 40, 40, 40, 1)));
+	}
+
 	@Test
 	public void testPriceToVolumeRatioComparator() {
 		PriceToVolumeRatioComparator cmp = new PriceToVolumeRatioComparator();

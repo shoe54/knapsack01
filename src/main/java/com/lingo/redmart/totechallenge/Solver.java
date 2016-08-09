@@ -2,6 +2,8 @@ package com.lingo.redmart.totechallenge;
 
 import java.time.Duration;
 import java.time.Instant;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.function.Predicate;
@@ -18,20 +20,31 @@ import java.util.function.Predicate;
 public abstract class Solver {
 	
 	/**
-	 * Convenience class to determine if Product should be allowed in Tote based
-	 * solely on whether the Product fits into the empty Tote by volume
+	 * Convenience class to determine if Product should be allowed in an empty Tote 
+	 * based on whether the Product fits into the empty Tote either by volume only, or by
+	 * dimensions (which implies a fit by volume as well).
 	 */
 	public static class DoesProductFitIntoEmptyTote implements Predicate<Product> {
 		private Tote tote;
+		/** true: check for fit using dimensions, false: check for fit by volume only */
+		private boolean testByDimensions;
 
 		public DoesProductFitIntoEmptyTote(Tote tote) {
+			this(tote, true);
+		}
+
+		public DoesProductFitIntoEmptyTote(Tote tote, boolean testByDimensions) {
 			super();
 			this.tote = tote;
+			this.testByDimensions = testByDimensions;
 		}
 
 		@Override
 		public boolean test(Product p) {
-			return p.getVolume() <= tote.getVolume();
+			if (testByDimensions)
+				return p.canFitInto(tote);
+			else
+				return p.getVolume() <= tote.getVolume();
 		}
 	}
 

@@ -30,8 +30,11 @@ public class AppTest {
 		products = a.readProductsFromCSV("src/test/resources/products.csv", null);
 		assertEquals(20000, products.size());
 		
-		products = a.readProductsFromCSV("src/test/resources/products.csv", new DoesProductFitIntoEmptyTote(tote));
+		products = a.readProductsFromCSV("src/test/resources/products.csv", new DoesProductFitIntoEmptyTote(tote, false));
 		assertEquals(19634, products.size());
+
+		products = a.readProductsFromCSV("src/test/resources/products.csv", new DoesProductFitIntoEmptyTote(tote));
+		assertEquals(17933, products.size());
 	}
 
 }
