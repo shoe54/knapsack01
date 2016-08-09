@@ -2,7 +2,7 @@
 
 In response to the programming challenge at http://geeks.redmart.com/2015/10/26/1000000th-customer-prize-another-programming-challenge/
 
-tl;dr: After building via `mvn package`, `cd` to the `target` directory and run `java -jar totechallange-0.0.1-SNAPSHOT-jar-with-dependencies.jar .\classes\products.csv BranchAndBound` to get the answer to the challenge.
+tl;dr: After building via `mvn package`, `cd` to the `target` directory and run `java -jar totechallange-0.0.2-SNAPSHOT-jar-with-dependencies.jar .\classes\products.csv BranchAndBound` to get the answer to the challenge.
 
 
 ## Description
@@ -29,7 +29,7 @@ There are other approximation approaches such as Genetic Algorithm, Monte Carlo,
 ## Running
 
     cd ./target
-    java -Xmx6144m -Xss8m -jar totechallange-0.0.1-SNAPSHOT-jar-with-dependencies.jar <csv file path> [algorithm]
+    java -Xmx6144m -Xss8m -jar totechallange-0.0.2-SNAPSHOT-jar-with-dependencies.jar <csv file path> [algorithm]
 
 Where `algorithm` is one of `Greedy`, `DynamicProgramming`, `MemoryFunction`, `BranchAndBound`, or `BruteForce`. If you run BruteForce you won't get to see the results. If algorithm is omitted, all algorithms are run except BruteForce.
 
