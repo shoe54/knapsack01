@@ -34,7 +34,7 @@
           			</descriptorRefs>
 			        <archive>
             			<manifest>
-              				<mainClass>com.lingo.redmart.totechallenge.App</mainClass>
+              				<mainClass>nz.co.lingo.algos.knapsack01.examples.App</mainClass>
             			</manifest>
           			</archive>
                	</configuration>
