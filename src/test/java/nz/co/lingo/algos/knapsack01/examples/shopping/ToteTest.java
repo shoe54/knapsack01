@@ -48,12 +48,12 @@ public class ToteTest {
 	}
 
 	@Test(expected=IllegalArgumentException.class)
-	public void testcanAccommodateItemNull() {
+	public void testCanAccommodateItemNull() {
 		t.canAccommodateItem(null);
 	}
 
 	@Test
-	public void testcanAccommodateItem() {
+	public void testCanAccommodateItem() {
 		assertTrue(t.canAccommodateItem(p1));
 		
 		t.addItem(p1);
@@ -117,12 +117,12 @@ public class ToteTest {
 	}
 
 	@Test(expected=IllegalArgumentException.class)
-	public void testaddItemNull() {
+	public void testAddItemNull() {
 		t.addItem(null);
 	}
 
 	@Test
-	public void testaddItem() {
+	public void testAddItem() {
 		boolean ret;
 		
 		ret = t.addItem(p1);

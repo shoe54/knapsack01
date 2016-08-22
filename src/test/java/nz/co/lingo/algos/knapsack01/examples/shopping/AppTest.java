@@ -30,13 +30,13 @@ public class AppTest {
 		Tote tote = new Tote(45, 30, 35);
 		List<Product> products;
 
-		products = a.readProductsFromCSV("src/test/resources/products.csv", null);
+		products = a.readProductsFromCSV("src/test/resources/nz/co/lingo/algos/knapsack01/examples/shopping/products.csv", null);
 		assertEquals(20000, products.size());
 		
-		products = a.readProductsFromCSV("src/test/resources/products.csv", new DoesProductFitIntoEmptyTote(tote, false));
+		products = a.readProductsFromCSV("src/test/resources/nz/co/lingo/algos/knapsack01/examples/shopping/products.csv", new DoesProductFitIntoEmptyTote(tote, false));
 		assertEquals(19634, products.size());
 
-		products = a.readProductsFromCSV("src/test/resources/products.csv", new DoesProductFitIntoEmptyTote(tote));
+		products = a.readProductsFromCSV("src/test/resources/nz/co/lingo/algos/knapsack01/examples/shopping/products.csv", new DoesProductFitIntoEmptyTote(tote));
 		assertEquals(17933, products.size());
 	}
 

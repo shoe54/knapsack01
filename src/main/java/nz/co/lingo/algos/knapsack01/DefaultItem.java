@@ -9,11 +9,12 @@ package nz.co.lingo.algos.knapsack01;
  */
 public class DefaultItem implements Item<Integer> {
 
-	private int cost;
-	private Integer value;
+	int cost;
+	Integer value;
 
 	public DefaultItem(int cost, Integer value) {
 		super();
+		if (value == null) throw new IllegalArgumentException("value cannot be null");
 		this.cost = cost;
 		this.value = value;
 	}

@@ -14,9 +14,9 @@ public class App {
 
 	public static void main(String[] args) {
 		// Online ad placements
-		DefaultItem adPlacement01 = new DefaultItem(50000, 100000); // 100,000 impressions, $500
-		DefaultItem adPlacement02 = new DefaultItem(60000, 150000); // 150,000 impressions, $600
-		DefaultItem adPlacement03 = new DefaultItem(75000, 200000); // 200,000 impressions, $750
+		DefaultItem adPlacement01 = new DefaultItem(50000, 100000); // $500, 100,000 impressions
+		DefaultItem adPlacement02 = new DefaultItem(60000, 150000); // $600, 150,000 impressions 
+		DefaultItem adPlacement03 = new DefaultItem(75000, 200000); // $750, 200,000 impressions 
 		
 		DefaultPool budget = new DefaultPool(60000);
 		

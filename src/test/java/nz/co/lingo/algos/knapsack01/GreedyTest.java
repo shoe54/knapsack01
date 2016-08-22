@@ -5,6 +5,7 @@ import static org.junit.Assert.assertEquals;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import nz.co.lingo.algos.knapsack01.Greedy;
 import nz.co.lingo.algos.knapsack01.examples.shopping.Product;
@@ -50,19 +51,19 @@ public class GreedyTest {
 
 		t = new Tote(20, 30, 25); // volume: 21000
 		g.doSolve(products, t);
-		assertEquals(TestUtil.setOfProducts(p1,p2,p3,p4,p5,p6,p7), t.getProducts());
+		assertEquals(TestUtil.setOfProducts(p1,p2,p3,p4,p5,p6,p7), t.getProducts().collect(Collectors.toSet()));
 		
 		t = new Tote(1, 10, 554); // volume: 5540
 		g.doSolve(products, t);
-		assertEquals(TestUtil.setOfProducts(p1,p2,p3), t.getProducts());
+		assertEquals(TestUtil.setOfProducts(p1,p2,p3), t.getProducts().collect(Collectors.toSet()));
 
 		t = new Tote(1, 10, 553); // volume: 5530
 		g.doSolve(products, t);
-		assertEquals(TestUtil.setOfProducts(p1,p2,p7), t.getProducts());
+		assertEquals(TestUtil.setOfProducts(p1,p2,p7), t.getProducts().collect(Collectors.toSet()));
 
 		t = new Tote(1, 10, 555); // volume: 5550
 		g.doSolve(products, t);
-		assertEquals(TestUtil.setOfProducts(p1,p2,p3), t.getProducts());
+		assertEquals(TestUtil.setOfProducts(p1,p2,p3), t.getProducts().collect(Collectors.toSet()));
 	}
 	
 	/**
@@ -91,7 +92,7 @@ public class GreedyTest {
 		products.add(p4);
 
 		g.doSolve(products, t);
-		assertEquals(TestUtil.setOfProducts(p1), t.getProducts());
+		assertEquals(TestUtil.setOfProducts(p1), t.getProducts().collect(Collectors.toSet()));
 	
 	}
 
@@ -104,12 +105,12 @@ public class GreedyTest {
 		Tote t = new Tote(1, 10, 1); // volume: 10
 
 		g.doSolve(products, t);
-		assertEquals(Collections.EMPTY_SET, t.getProducts());
+		assertEquals(Collections.EMPTY_SET, t.getProducts().collect(Collectors.toSet()));
 	
 		Product p1 = new Product(1, 20, 5, 2, 1, 1); // volume: 10
 		products.add(p1);
 		t.removeAllProducts();
 		g.doSolve(products, t);
-		assertEquals(TestUtil.setOfProducts(p1), t.getProducts());
+		assertEquals(TestUtil.setOfProducts(p1), t.getProducts().collect(Collectors.toSet()));
 	}
 }

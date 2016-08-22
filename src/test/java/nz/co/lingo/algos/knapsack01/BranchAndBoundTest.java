@@ -27,6 +27,8 @@ public class BranchAndBoundTest {
 
 	@Test
 	public void testMaximizeMyShopping01() {
+		// TODO add tests using DefaultItem
+		
 		List<Product> products = new ArrayList<>();
 		Tote t = new Tote(10, 12, 14); // Volume: 1680
 		

@@ -66,7 +66,7 @@ public class BranchAndBound<
 		/** Is this node's corresponding item included in this branch of the tree? */
 		boolean included = false;
 
-		public Node(int level, IV value, int cost, Node parent) {
+		public Node(int level, IV value, int cost, Node<IV> parent) {
 			this.level = level;
 			this.value = value;
 			this.cost = cost;
@@ -98,14 +98,14 @@ public class BranchAndBound<
 		items.sort(Collections.reverseOrder(pool.getValueToCostRatioComparator()));
 
 		//public static final Node ZERO = new Node(0,PriceWeightTuple.ZERO,0,null); 
-		final Node ZERO = getZeroNode(items.get(0).getValueZero());
+		final Node<IV> ZERO = getZeroNode(items.get(0).getValueZero());
 		Node<IV> best = ZERO,
 			 u = ZERO, 
 			 v = ZERO;
 		
 		// On each iteration nodes are potentially added to the queue. On the next iteration
 		// nodes are pulled out in the order of potential best fit first
-		PriorityQueue<Node> q = new PriorityQueue<Node>();
+		PriorityQueue<Node<IV>> q = new PriorityQueue<Node<IV>>();
 		
 		// Start at the root of the tree
 		v.bound = bound(v, pool, items);
@@ -116,13 +116,12 @@ public class BranchAndBound<
 						  // v is now the node at the branch under evaluation
 			if (v.bound.compareTo(best.value) > 0) { // Is node still promising?
 				// Get the item at the tree level we are currently on
-				I product = items.get(v.level);
+				I item = items.get(v.level);
 				
 				// Set u to the next item (child of current node)
-				u = new Node(v.level + 1,
-						product.addValue(v.value),
-						//v.value.add(product.getValue()), 
-						v.cost + product.getCost(),
+				u = new Node<IV>(v.level + 1,
+						item.addValue(v.value),
+						v.cost + item.getCost(),
 						v);
 				
 				// Should we update maxValue?
@@ -139,7 +138,7 @@ public class BranchAndBound<
 				}
 
 				// Set u to not include the next child of v
-				u = new Node(v.level + 1, v.value, v.cost, v);
+				u = new Node<IV>(v.level + 1, v.value, v.cost, v);
 				
 				u.bound = bound(u, pool, items);
 				// Is the node promising?
@@ -149,7 +148,7 @@ public class BranchAndBound<
 			}
 		}
 
-		Node trace = best;
+		Node<IV> trace = best;
 		while (trace != null) {
 			if (trace.included)
 				pool.addItem(items.get(trace.level-1));
@@ -157,46 +156,45 @@ public class BranchAndBound<
 		}
 	}
 
-	public Node getZeroNode(IV itemValueZero) {
-		return new Node(0,itemValueZero,0,null);
+	public Node<IV> getZeroNode(IV itemValueZero) {
+		return new Node<IV>(0,itemValueZero,0,null);
 	}
 
 	/**
 	 * Calculate maximum possible value obtainable on the branch starting at node by
-	 * greedily including the rest of the products from that node onwards
+	 * greedily including the rest of the items from that node onwards
 	 * @param u
-	 * @param tote
-	 * @param products
+	 * @param pool
+	 * @param items
 	 * @return
 	 */
-	IV bound(Node<IV> u, P tote, List<I> products) {
+	IV bound(Node<IV> u, P pool, List<I> items) {
 		int j, k;
 		int totalVolume;
 		IV result;
 		
-		if (u.cost >= tote.getAllowedCost())
-			return products.get(0).getValueZero();
+		if (u.cost >= pool.getAllowedCost())
+			return items.get(0).getValueZero();
 		else {
-			result = (IV) products.get(0).valueToDouble(u.value); // Get a real number representation of PriceWeightTuple
+			result = (IV) items.get(0).valueToDouble(u.value); // Get a real number representation of PriceWeightTuple
 			//result = u.value.toDouble(); // Get a real number representation of PriceWeightTuple
 			j = u.level + 1;
 			totalVolume = u.cost;
-			// Iterate thru products. Stop iterating when the whole product does not fit in tote
-			while (j <= products.size() 
-					&& totalVolume + products.get(j-1).getCost() <= tote.getAllowedCost()) {
-				I product = products.get(j-1);
-				totalVolume += product.getCost();
-				result = product.addValue(result);
+			// Iterate thru items. Stop iterating when the whole item does not fit in pool
+			while (j <= items.size() 
+					&& totalVolume + items.get(j-1).getCost() <= pool.getAllowedCost()) {
+				I item = items.get(j-1);
+				totalVolume += item.getCost();
+				result = item.addValue(result);
 				j++;
 			}
-			// Add a fraction of the next product to fill up the tote
+			// Add a fraction of the next item to fill up the pool
 			k = j;
-			if (k <= products.size()) {
-				I product = products.get(k-1);
-				int remainingVolume = tote.getAllowedCost() - totalVolume;
-				IV fraction = product.divideByCost(product.multiplyValue(remainingVolume));
-				//IV fraction = product.getValue().multiply(remainingVolume).divide(product.getCost());
-				result = product.addValues(result, fraction);
+			if (k <= items.size()) {
+				I item = items.get(k-1);
+				int remainingVolume = pool.getAllowedCost() - totalVolume;
+				IV fraction = item.divideByCost(item.multiplyValue(remainingVolume));
+				result = item.addValues(result, fraction);
 			}
 			
 			return result;

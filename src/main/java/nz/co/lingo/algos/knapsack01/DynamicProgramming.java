@@ -10,7 +10,12 @@ import java.util.List;
  * @author Shu
  *
  */
-public class DynamicProgramming<IV extends Comparable<? super IV>, I extends Item<IV>, P extends Pool<I>> extends Solver<IV, I, P> {
+public class DynamicProgramming<
+		IV extends Comparable<? super IV>, 
+		I extends Item<IV>, 
+		P extends Pool<I>> 
+	extends Solver<IV, I, P> {
+
 	@Override
 	protected void doSolve(List<I> items, P tote) {
 		// Where:
@@ -38,6 +43,7 @@ public class DynamicProgramming<IV extends Comparable<? super IV>, I extends Ite
 		//
 		// Note that S[i-1][c] effectively means the product was not included in the solution
 		
+		//TODO: Option to optimize so that if allowedCost is a high value we don't allocate array width for the costs < allowedCost
 		IV S[][] = (IV[][])new Comparable[items.size()+1][tote.getAllowedCost()+1];
 		
 		I Pi = null; // P(i), aka products.get(i-1)
@@ -52,9 +58,6 @@ public class DynamicProgramming<IV extends Comparable<? super IV>, I extends Ite
 					if (Pi.getCost() > c)
 						S[i][c] = didNotInclude;
 					else {
-						//int didIncludeTotalPrice = Pi.getPrice() + S[i-1][c-Pi.getVolume()].getPrice();  
-						//int didIncludeTotalWeight = Pi.getWeight() + S[i-1][c-Pi.getVolume()].getWeight();
-						//PriceWeightTuple<Integer> didInclude = new PriceWeightTuple<Integer>(didIncludeTotalPrice, didIncludeTotalWeight);
 						IV didInclude = Pi.addValue(S[i-1][c-Pi.getCost()]);
 						int cmp = didNotInclude.compareTo(didInclude);
 						S[i][c] = cmp > 0 ? didNotInclude : didInclude;

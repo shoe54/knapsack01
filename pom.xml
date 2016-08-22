@@ -2,12 +2,12 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>com.lingo.redmart</groupId>
-	<artifactId>totechallenge</artifactId>
-	<version>0.0.2-SNAPSHOT</version>
+	<groupId>nz.co.lingo.algos</groupId>
+	<artifactId>knapsack01</artifactId>
+	<version>0.0.3-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
-	<name>totechallenge</name>
+	<name>knapsack01</name>
 	<url>http://maven.apache.org</url>
 
 	<properties>
@@ -32,11 +32,13 @@
           			<descriptorRefs>
             			<descriptorRef>jar-with-dependencies</descriptorRef>
           			</descriptorRefs>
+          			<!-- TODO move examples into test only
 			        <archive>
             			<manifest>
-              				<mainClass>nz.co.lingo.algos.knapsack01.examples.App</mainClass>
+              				<mainClass>nz.co.lingo.algos.knapsack01.examples.shopping.App</mainClass>
             			</manifest>
           			</archive>
+          			 -->
                	</configuration>
 			    <executions>
           			<execution>
@@ -64,6 +66,7 @@
 			<version>1.10.19</version>
 			<scope>test</scope>
 		</dependency>
+		<!-- TODO move this into a test dependency -->
 		<dependency>
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-csv</artifactId>

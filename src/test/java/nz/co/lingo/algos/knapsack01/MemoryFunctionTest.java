@@ -5,6 +5,7 @@ import static org.junit.Assert.assertEquals;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import nz.co.lingo.algos.knapsack01.MemoryFunction;
 import nz.co.lingo.algos.knapsack01.examples.shopping.Product;
@@ -44,7 +45,7 @@ public class MemoryFunctionTest {
 		products.add(p7);
 
 		mf.doSolve(products, t);
-		assertEquals(TestUtil.setOfProducts(p1), t.getProducts());
+		assertEquals(TestUtil.setOfProducts(p1), t.getProducts().collect(Collectors.toSet()));
 	}
 
 	@Test
@@ -63,7 +64,7 @@ public class MemoryFunctionTest {
 		products.add(p4);
 
 		mf.doSolve(products, t);
-		assertEquals(TestUtil.setOfProducts(p2,p4), t.getProducts());
+		assertEquals(TestUtil.setOfProducts(p2,p4), t.getProducts().collect(Collectors.toSet()));
 	}
 
 	/**
@@ -81,7 +82,7 @@ public class MemoryFunctionTest {
 		products.add(p2);
 
 		mf.doSolve(products, t);
-		assertEquals(TestUtil.setOfProducts(p1), t.getProducts());
+		assertEquals(TestUtil.setOfProducts(p1), t.getProducts().collect(Collectors.toSet()));
 		
 		t.removeAllProducts();
 		products.clear();
@@ -89,7 +90,7 @@ public class MemoryFunctionTest {
 		products.add(p1);
 		
 		mf.doSolve(products, t);
-		assertEquals(TestUtil.setOfProducts(p1), t.getProducts());
+		assertEquals(TestUtil.setOfProducts(p1), t.getProducts().collect(Collectors.toSet()));
 	}
 	
 	/**
@@ -147,7 +148,7 @@ public class MemoryFunctionTest {
 		products.add(p22);
 
 		mf.doSolve(products, t);
-		assertEquals(TestUtil.setOfProducts(p1,p2,p3,p4,p5,p7,p11,p16,p17,p18,p19,p21), t.getProducts());
+		assertEquals(TestUtil.setOfProducts(p1,p2,p3,p4,p5,p7,p11,p16,p17,p18,p19,p21), t.getProducts().collect(Collectors.toSet()));
 	}
 
 	/**
@@ -159,7 +160,7 @@ public class MemoryFunctionTest {
 		Tote t = new Tote(1, 10, 1); // volume: 10
 
 		mf.doSolve(products, t);
-		assertEquals(Collections.EMPTY_SET, t.getProducts());
+		assertEquals(Collections.EMPTY_SET, t.getProducts().collect(Collectors.toSet()));
 	}
 
 	/**
@@ -171,13 +172,13 @@ public class MemoryFunctionTest {
 		Tote t = new Tote(1, 10, 1); // volume: 10
 
 		mf.solve(products, t);
-		assertEquals(Collections.EMPTY_SET, t.getProducts());
+		assertEquals(Collections.EMPTY_SET, t.getProducts().collect(Collectors.toSet()));
 	
 		Product p1 = new Product(1, 20, 5, 2, 1, 1); // volume: 10
 		products.add(p1);
 		t.removeAllProducts();
 		mf.doSolve(products, t);
-		assertEquals(TestUtil.setOfProducts(p1), t.getProducts());
+		assertEquals(TestUtil.setOfProducts(p1), t.getProducts().collect(Collectors.toSet()));
 	}
 
 }
