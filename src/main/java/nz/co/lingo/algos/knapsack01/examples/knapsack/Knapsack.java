@@ -5,6 +5,11 @@ import java.util.Comparator;
 
 import nz.co.lingo.algos.knapsack01.AbstractPool;
 
+/**
+ * TODO test cases for this class
+ * @author Shu
+ *
+ */
 public class Knapsack extends AbstractPool<Gear> {
 
 	public Knapsack(int allowedCost) {
@@ -13,8 +18,8 @@ public class Knapsack extends AbstractPool<Gear> {
 
 	@Override
 	public Comparator<Gear> getValueToCostRatioComparator() {
-		return (Gear o1, Gear o2) -> 
-			((o1.getValue().divide(new BigDecimal(o1.getCost()))).compareTo((o2.getValue().divide(new BigDecimal(o2.getCost())))));
+		return (o1, o2) -> 
+			(o1.divideByCost(o1.getValue()).compareTo(o2.divideByCost(o2.getValue())));
 	}
 
 }

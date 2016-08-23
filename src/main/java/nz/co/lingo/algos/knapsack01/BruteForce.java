@@ -50,7 +50,7 @@ combinationIteration:
 				if (combination.testBit(bitIndex)) {
 					// System.out.println("Bit " + bitIndex + " is set");
 					I itemAtBit = items.get(bitIndex);
-					combinationValue = itemAtBit.addValue(combinationValue); //combinationValue.add(itemAtBit.getValue());
+					combinationValue = itemAtBit.addValue(combinationValue);
 					combinationCost += itemAtBit.getCost();
 					if (combinationCost > tote.getAllowedCost())
 						// Solution is not feasible already at this point. Skip this combination

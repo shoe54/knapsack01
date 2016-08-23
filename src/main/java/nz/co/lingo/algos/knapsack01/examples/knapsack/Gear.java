@@ -9,6 +9,9 @@ import nz.co.lingo.algos.knapsack01.AbstractNumberItem;
  * BigDecimal valued AbstractItem. Cost is in grams
  * 
  * Immutable.
+ * 
+ * TODO test cases for this class
+ * 
  * @author Shu
  *
  */

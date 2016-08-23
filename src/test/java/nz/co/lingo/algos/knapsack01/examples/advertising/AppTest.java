@@ -8,8 +8,6 @@ import nz.co.lingo.algos.knapsack01.DefaultItem;
 import nz.co.lingo.algos.knapsack01.DefaultPool;
 import nz.co.lingo.algos.knapsack01.examples.shopping.TestUtil;
 
-import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class AppTest {

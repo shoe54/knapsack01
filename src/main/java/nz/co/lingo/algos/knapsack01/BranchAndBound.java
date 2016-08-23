@@ -176,7 +176,7 @@ public class BranchAndBound<
 		if (u.cost >= pool.getAllowedCost())
 			return items.get(0).getValueZero();
 		else {
-			result = (IV) items.get(0).valueToDouble(u.value); // Get a real number representation of PriceWeightTuple
+			result = (IV) items.get(0).valueToDouble(u.value); // Get a real number representation of the item value
 			//result = u.value.toDouble(); // Get a real number representation of PriceWeightTuple
 			j = u.level + 1;
 			totalVolume = u.cost;

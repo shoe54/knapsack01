@@ -31,6 +31,11 @@ public abstract class AbstractPool<I extends Item<?>> implements Pool<I> {
 	public Stream<I> getItems() {
 		return items.stream();
 	}
+	
+	public void removeAllItems() {
+		// TODO test case
+		items.clear();
+	}
 
 	@Override
 	public int getUsedCost() {
