@@ -35,17 +35,17 @@ public class App {
 	}
 	
 	public void goBruteForce(Knapsack knapsack) {
-		BruteForce<BigDecimal, Gear, Knapsack> bf = new BruteForce<>();
+		BruteForce<BigDecimal, Double, Gear, Knapsack> bf = new BruteForce<>();
 		bf.solve(Arrays.asList(gear01, gear02, gear03, gear04, gear05), knapsack);
 	}
 
 	public void goDynamicProgramming(Knapsack knapsack) {
-		DynamicProgramming<BigDecimal, Gear, Knapsack> bf = new DynamicProgramming<>();
+		DynamicProgramming<BigDecimal, Double, Gear, Knapsack> bf = new DynamicProgramming<>();
 		bf.solve(Arrays.asList(gear01, gear02, gear03, gear04, gear05), knapsack);
 	}
 
 	public void goBranchAndBound(Knapsack knapsack) {
-		BranchAndBound<BigDecimal, Gear, Knapsack> bf = new BranchAndBound<>();
+		BranchAndBound<BigDecimal, Double, Gear, Knapsack> bf = new BranchAndBound<>();
 		bf.solve(Arrays.asList(gear01, gear02, gear03, gear04, gear05), knapsack);
 	}
 

@@ -34,9 +34,10 @@ import java.util.PriorityQueue;
  */
 public class BranchAndBound<
 		IV extends Comparable<? super IV>, 
-		I extends Item<IV>, 
-		P extends Pool<I>>
-	extends Solver<IV, I, P> {
+		IVD extends Comparable<? super IVD>, 
+		I extends Item<IV, IVD>, 
+		P extends Pool<IV, IVD, I>>
+	extends Solver<IV, IVD, I, P> {
 	
 	/**
 	 * A Node that is evaluated and fed into the Priority Queue if promising.
@@ -44,7 +45,7 @@ public class BranchAndBound<
 	 * @author Shu
 	 *
 	 */
-	public static class Node<IV extends Comparable<? super IV>> implements Comparable<Node<IV>> {
+	public static class Node<IV extends Comparable<? super IV>, IVD extends Comparable<? super IVD>> implements Comparable<Node<IV, IVD>> {
 		/** Is the index to the item to be either included or not included. Is also the 
 		 * branch level on the state space tree. */
 		int level;
@@ -57,16 +58,16 @@ public class BranchAndBound<
 		IV value;
 		
 		/** The upper bound value on this Node */
-		IV bound;
+		IVD bound;
 		
 		/** The nodes from above this Node in the tree. Is used to gather the items that 
 		 * are included in a search result */
-		Node<IV> parent;
+		Node<IV, IVD> parent;
 		
 		/** Is this node's corresponding item included in this branch of the tree? */
 		boolean included = false;
 
-		public Node(int level, IV value, int cost, Node<IV> parent) {
+		public Node(int level, IV value, int cost, Node<IV, IVD> parent) {
 			this.level = level;
 			this.value = value;
 			this.cost = cost;
@@ -86,7 +87,7 @@ public class BranchAndBound<
 		 * @return
 		 */
 		@Override
-		public int compareTo(Node<IV> arg0) {
+		public int compareTo(Node<IV, IVD> arg0) {
 			return this.bound.compareTo(arg0.bound);
 		}
 	}
@@ -98,14 +99,14 @@ public class BranchAndBound<
 		items.sort(Collections.reverseOrder(pool.getValueToCostRatioComparator()));
 
 		//public static final Node ZERO = new Node(0,PriceWeightTuple.ZERO,0,null); 
-		final Node<IV> ZERO = getZeroNode(items.get(0).getValueZero());
-		Node<IV> best = ZERO,
+		final Node<IV, IVD> ZERO = getZeroNode(items.get(0).getValueZero());
+		Node<IV, IVD> best = ZERO,
 			 u = ZERO, 
 			 v = ZERO;
 		
 		// On each iteration nodes are potentially added to the queue. On the next iteration
 		// nodes are pulled out in the order of potential best fit first
-		PriorityQueue<Node<IV>> q = new PriorityQueue<Node<IV>>();
+		PriorityQueue<Node<IV, IVD>> q = new PriorityQueue<Node<IV, IVD>>();
 		
 		// Start at the root of the tree
 		v.bound = bound(v, pool, items);
@@ -114,12 +115,12 @@ public class BranchAndBound<
 		while (!q.isEmpty()) {
 			v = q.poll(); // Remove node with best bound. 
 						  // v is now the node at the branch under evaluation
-			if (v.bound.compareTo(best.value) > 0) { // Is node still promising?
+			if (v.bound.compareTo(items.get(0).valueToDouble(best.value)) > 0) { // Is node still promising?
 				// Get the item at the tree level we are currently on
 				I item = items.get(v.level);
 				
 				// Set u to the next item (child of current node)
-				u = new Node<IV>(v.level + 1,
+				u = new Node<IV, IVD>(v.level + 1,
 						item.addValue(v.value),
 						v.cost + item.getCost(),
 						v);
@@ -132,23 +133,23 @@ public class BranchAndBound<
 				
 				u.bound = bound(u, pool, items);
 				// Is the node promising?
-				if (u.bound.compareTo(best.value) > 0) {
+				if (u.bound.compareTo(items.get(0).valueToDouble(best.value)) > 0) {
 					u.included = true;
 					q.offer(u);
 				}
 
 				// Set u to not include the next child of v
-				u = new Node<IV>(v.level + 1, v.value, v.cost, v);
+				u = new Node<IV, IVD>(v.level + 1, v.value, v.cost, v);
 				
 				u.bound = bound(u, pool, items);
 				// Is the node promising?
-				if (u.bound.compareTo(best.value) > 0) {
+				if (u.bound.compareTo(items.get(0).valueToDouble(best.value)) > 0) {
 					q.offer(u);
 				}
 			}
 		}
 
-		Node<IV> trace = best;
+		Node<IV, IVD> trace = best;
 		while (trace != null) {
 			if (trace.included)
 				pool.addItem(items.get(trace.level-1));
@@ -156,8 +157,8 @@ public class BranchAndBound<
 		}
 	}
 
-	public Node<IV> getZeroNode(IV itemValueZero) {
-		return new Node<IV>(0,itemValueZero,0,null);
+	public Node<IV, IVD> getZeroNode(IV itemValueZero) {
+		return new Node<IV, IVD>(0,itemValueZero,0,null);
 	}
 
 	/**
@@ -168,15 +169,15 @@ public class BranchAndBound<
 	 * @param items
 	 * @return
 	 */
-	IV bound(Node<IV> u, P pool, List<I> items) {
+	IVD bound(Node<IV, IVD> u, P pool, List<I> items) {
 		int j, k;
 		int totalVolume;
-		IV result;
+		IVD result;
 		
 		if (u.cost >= pool.getAllowedCost())
-			return items.get(0).getValueZero();
+			return items.get(0).valueToDouble(items.get(0).getValueZero());
 		else {
-			result = (IV) items.get(0).valueToDouble(u.value); // Get a real number representation of the item value
+			result = (IVD) items.get(0).valueToDouble(u.value); // Get a real number representation of the item value
 			//result = u.value.toDouble(); // Get a real number representation of PriceWeightTuple
 			j = u.level + 1;
 			totalVolume = u.cost;
@@ -185,7 +186,7 @@ public class BranchAndBound<
 					&& totalVolume + items.get(j-1).getCost() <= pool.getAllowedCost()) {
 				I item = items.get(j-1);
 				totalVolume += item.getCost();
-				result = item.addValue(result);
+				result = item.addDouble(result);
 				j++;
 			}
 			// Add a fraction of the next item to fill up the pool
@@ -193,8 +194,8 @@ public class BranchAndBound<
 			if (k <= items.size()) {
 				I item = items.get(k-1);
 				int remainingVolume = pool.getAllowedCost() - totalVolume;
-				IV fraction = item.divideByCost(item.multiplyValue(remainingVolume));
-				result = item.addValues(result, fraction);
+				IVD fraction = item.divideByCost(item.multiplyValue(remainingVolume));
+				result = item.addDoubles(result, fraction);
 			}
 			
 			return result;

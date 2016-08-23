@@ -27,6 +27,10 @@ public class AbstractNumberItemTest {
 		public Double divideByCost(Double top) {
 			throw new RuntimeException();
 		}
+		@Override
+		public Double addDouble(Double d) {
+			throw new RuntimeException();
+		}
 	}
 	static Target t1, t2, t3, t4, t5;
 
@@ -84,11 +88,11 @@ public class AbstractNumberItemTest {
 
 	@Test
 	public void testValueToDouble01() {
-		assertEquals(1.0d, t1.valueToDouble(1.0));
-		assertEquals(-2.0d, t1.valueToDouble(-2.0));
-		assertEquals(0.0d, t1.valueToDouble(0.0));
-		assertEquals(67.0d, t1.valueToDouble(67.0));
-		assertEquals(3.334d, t1.valueToDouble(3.334));
+		assertEquals(new Double(1.0), t1.valueToDouble(1.0));
+		assertEquals(new Double(-2.0d), t1.valueToDouble(-2.0));
+		assertEquals(new Double(0.0d), t1.valueToDouble(0.0));
+		assertEquals(new Double(67.0d), t1.valueToDouble(67.0));
+		assertEquals(new Double(3.334d), t1.valueToDouble(3.334));
 	}
 
 	@Test(expected=NullPointerException.class)

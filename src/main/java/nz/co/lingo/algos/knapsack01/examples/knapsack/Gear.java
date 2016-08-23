@@ -37,8 +37,13 @@ public class Gear extends AbstractNumberItem<BigDecimal> {
 	}
 
 	@Override
-	public BigDecimal divideByCost(BigDecimal top) {
-		return top.divide(new BigDecimal(getCost()), 6, RoundingMode.HALF_UP);
+	public Double divideByCost(BigDecimal top) {
+		return top.divide(new BigDecimal(getCost()), 8, RoundingMode.HALF_UP).doubleValue();
+	}
+
+	@Override
+	public Double addDouble(Double d) {
+		return getValue().add(new BigDecimal(d)).doubleValue();
 	}
 
 }

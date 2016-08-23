@@ -9,7 +9,7 @@ import java.util.stream.Stream;
 import nz.co.lingo.algos.knapsack01.Pool;
 import nz.co.lingo.algos.knapsack01.examples.shopping.App.PriceToVolumeRatioComparator;
 
-public class Tote extends Cuboid implements Pool<Product> {
+public class Tote extends Cuboid implements Pool<PriceWeightTuple<Integer>, PriceWeightTuple<Double>, Product> {
 	Set<Product> products = new HashSet<>();
 	
 	public Tote(int length, int width, int height) {

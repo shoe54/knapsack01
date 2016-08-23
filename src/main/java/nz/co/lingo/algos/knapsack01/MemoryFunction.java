@@ -8,8 +8,12 @@ import java.util.List;
  * @author Shu
  *
  */
-public class MemoryFunction<IV extends Comparable<? super IV>, I extends Item<IV>, P extends Pool<I>> 
-	extends Solver<IV, I, P> {
+public class MemoryFunction<
+		IV extends Comparable<? super IV>, 
+		IVD extends Comparable<? super IVD>, 
+		I extends Item<IV, IVD>, 
+		P extends Pool<IV, IVD, I>> 
+	extends Solver<IV, IVD, I, P> {
 
 	@Override
 	protected void doSolve(List<I> products, P tote) {

@@ -1,15 +1,21 @@
 package nz.co.lingo.algos.knapsack01;
 
+import java.util.Comparator;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-public abstract class AbstractPool<I extends Item<?>> implements Pool<I> {
+public class GenericPool<
+		IV extends Comparable<? super IV>, 
+		IVD extends Comparable<? super IVD>, 
+		I extends Item<IV, IVD>> 
+	implements Pool<IV, IVD, I> {
+	
 	Set<I> items = new HashSet<>();
 	int allowedCost;
 
-	public AbstractPool(int allowedCost) {
+	public GenericPool(int allowedCost) {
 		super();
 		this.allowedCost = allowedCost;
 	}
@@ -48,6 +54,12 @@ public abstract class AbstractPool<I extends Item<?>> implements Pool<I> {
 	}
 
 	@Override
+	public Comparator<I> getValueToCostRatioComparator() {
+		return (o1, o2) -> 
+			(o1.divideByCost(o1.getValue()).compareTo(o2.divideByCost(o2.getValue())));
+	}
+
+	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
@@ -64,7 +76,7 @@ public abstract class AbstractPool<I extends Item<?>> implements Pool<I> {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		AbstractPool other = (AbstractPool) obj;
+		GenericPool other = (GenericPool) obj;
 		if (allowedCost != other.allowedCost)
 			return false;
 		if (items == null) {

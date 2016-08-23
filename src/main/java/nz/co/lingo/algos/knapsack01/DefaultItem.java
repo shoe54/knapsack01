@@ -29,7 +29,12 @@ public class DefaultItem extends AbstractNumberItem<Integer> {
 	}
 
 	@Override
-	public Integer divideByCost(Integer top) {
-		return top / getCost();
+	public Double divideByCost(Integer top) {
+		return top / (double)getCost();
+	}
+
+	@Override
+	public Double addDouble(Double d) {
+		return getValue() + d;
 	}
 }

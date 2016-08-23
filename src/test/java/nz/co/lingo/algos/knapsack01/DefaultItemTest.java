@@ -61,10 +61,10 @@ public class DefaultItemTest {
 
 	@Test
 	public void testValueToDouble01() {
-		assertEquals(1.0d, t1.valueToDouble(1));
-		assertEquals(-2.0d, t1.valueToDouble(-2));
-		assertEquals(0.0d, t1.valueToDouble(0));
-		assertEquals(67.0d, t1.valueToDouble(67));
+		assertEquals(new Double(1.0d), t1.valueToDouble(1));
+		assertEquals(new Double(-2.0d), t1.valueToDouble(-2));
+		assertEquals(new Double(0.0d), t1.valueToDouble(0));
+		assertEquals(new Double(67.0d), t1.valueToDouble(67));
 	}
 
 	@Test(expected=NullPointerException.class)
@@ -118,10 +118,10 @@ public class DefaultItemTest {
 
 	@Test
 	public void testDivideByCost01() {
-		assertEquals(new Integer(3), t1.divideByCost(30));
-		assertEquals(new Integer(2), t2.divideByCost(10));
-		assertEquals(new Integer(1), t3.divideByCost(9));
-		assertEquals(new Integer(0), t4.divideByCost(0));
+		assertEquals(new Double(3), t1.divideByCost(30));
+		assertEquals(new Double(2), t2.divideByCost(10));
+		assertEquals(new Double(1), t3.divideByCost(9));
+		assertEquals(new Double(0), t4.divideByCost(0));
 	}
 
 	@Test(expected=NullPointerException.class)

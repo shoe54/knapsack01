@@ -13,7 +13,11 @@ import java.util.List;
  * @author Shu
  *
  */
-public abstract class Solver<IV extends Comparable<? super IV>, I extends Item<IV>, P extends Pool<I>> {
+public abstract class Solver<
+		IV extends Comparable<? super IV>, 
+		IVD extends Comparable<? super IVD>, 
+		I extends Item<IV, IVD>, 
+		P extends Pool<IV, IVD, I>> {
 	
 	/**
 	 * Return time taken in milliseconds

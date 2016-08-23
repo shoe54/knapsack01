@@ -23,11 +23,11 @@ import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
 
 public class App {
-	public static class ShoppingGreedy extends Greedy<PriceWeightTuple<Integer>, Product, Tote> {}
-	public static class ShoppingMemoryFunction extends MemoryFunction<PriceWeightTuple<Integer>, Product, Tote> {}
-	public static class ShoppingDynamicProgramming extends DynamicProgramming<PriceWeightTuple<Integer>, Product, Tote> {}
-	public static class ShoppingBranchAndBound extends BranchAndBound<PriceWeightTuple<Integer>, Product, Tote> {}
-	public static class ShoppingBruteForce extends BruteForce<PriceWeightTuple<Integer>, Product, Tote> {}
+	public static class ShoppingGreedy extends Greedy<PriceWeightTuple<Integer>, PriceWeightTuple<Double>, Product, Tote> {}
+	public static class ShoppingMemoryFunction extends MemoryFunction<PriceWeightTuple<Integer>, PriceWeightTuple<Double>, Product, Tote> {}
+	public static class ShoppingDynamicProgramming extends DynamicProgramming<PriceWeightTuple<Integer>, PriceWeightTuple<Double>, Product, Tote> {}
+	public static class ShoppingBranchAndBound extends BranchAndBound<PriceWeightTuple<Integer>, PriceWeightTuple<Double>, Product, Tote> {}
+	public static class ShoppingBruteForce extends BruteForce<PriceWeightTuple<Integer>, PriceWeightTuple<Double>, Product, Tote> {}
 	
 	/**
 	 * Convenience class to determine if Product should be allowed in an empty Tote 
@@ -83,7 +83,7 @@ public class App {
 	}
 
 	void letsGoShopping(String productsCSVFilePath, 
-			List<Class<? extends Solver<PriceWeightTuple<Integer>, Product, Tote>>> shoppingAlgos, 
+			List<Class<? extends Solver<PriceWeightTuple<Integer>, PriceWeightTuple<Double>, Product, Tote>>> shoppingAlgos, 
 			Tote tote)
 			throws IOException, InstantiationException, IllegalAccessException {
 		// Convert CSV to list of Products
@@ -91,7 +91,7 @@ public class App {
 				productsCSVFilePath, new DoesProductFitIntoEmptyTote(tote));
 
 		// Run the shopping algorithms
-		for (Class<? extends Solver<PriceWeightTuple<Integer>, Product, Tote>> shoppingAlgo : shoppingAlgos) {
+		for (Class<? extends Solver<PriceWeightTuple<Integer>, PriceWeightTuple<Double>, Product, Tote>> shoppingAlgo : shoppingAlgos) {
 			System.out.println("Running " + shoppingAlgo.getSimpleName() + " algorithm. Please wait...");
 			Duration timeTaken = shoppingAlgo.newInstance().solve(products, tote);
 			System.out.println(
@@ -154,16 +154,16 @@ public class App {
 				System.err.println("Specify CSV filepath as the first command line parameter");
 				return;
 			}		
-			List<Class<? extends Solver<PriceWeightTuple<Integer>, Product, Tote>>> shoppingAlgos;
+			List<Class<? extends Solver<PriceWeightTuple<Integer>, PriceWeightTuple<Double>, Product, Tote>>> shoppingAlgos;
 			if (args.length >= 2) {
 				// Algorithm to run was specified as second command line parameter
-				Class<? extends Solver<PriceWeightTuple<Integer>, Product, Tote>> shoppingAlgo = 
-						(Class<? extends Solver<PriceWeightTuple<Integer>, Product, Tote>>) 
+				Class<? extends Solver<PriceWeightTuple<Integer>, PriceWeightTuple<Double>, Product, Tote>> shoppingAlgo = 
+						(Class<? extends Solver<PriceWeightTuple<Integer>, PriceWeightTuple<Double>, Product, Tote>>) 
 						Class.forName("nz.co.lingo.algos.knapsack01.examples.shopping.App$Shopping" + args[1]);
-				shoppingAlgos = Arrays.<Class<? extends Solver<PriceWeightTuple<Integer>, Product, Tote>>>asList(shoppingAlgo);
+				shoppingAlgos = Arrays.<Class<? extends Solver<PriceWeightTuple<Integer>, PriceWeightTuple<Double>, Product, Tote>>>asList(shoppingAlgo);
 			} else {
 				// Algorithm not specified in command line. Run all except BruteForce
-				shoppingAlgos = Arrays.<Class<? extends Solver<PriceWeightTuple<Integer>, Product, Tote>>>asList(
+				shoppingAlgos = Arrays.<Class<? extends Solver<PriceWeightTuple<Integer>, PriceWeightTuple<Double>, Product, Tote>>>asList(
 					ShoppingGreedy.class,
 					ShoppingDynamicProgramming.class,
 					ShoppingMemoryFunction.class,

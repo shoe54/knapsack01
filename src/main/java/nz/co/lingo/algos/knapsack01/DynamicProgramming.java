@@ -14,9 +14,10 @@ import java.util.List;
  */
 public class DynamicProgramming<
 		IV extends Comparable<? super IV>, 
-		I extends Item<IV>, 
-		P extends Pool<I>> 
-	extends Solver<IV, I, P> {
+		IVD extends Comparable<? super IVD>, 
+		I extends Item<IV, IVD>, 
+		P extends Pool<IV, IVD, I>> 
+	extends Solver<IV, IVD, I, P> {
 
 	@Override
 	protected void doSolve(List<I> items, P tote) {

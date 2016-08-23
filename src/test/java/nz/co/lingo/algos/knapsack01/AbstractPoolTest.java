@@ -17,7 +17,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class AbstractPoolTest {
-	public static class Target extends AbstractPool<DefaultItem> {
+	public static class Target extends GenericPool<Integer, Double, DefaultItem> {
 		public Target(int allowedCost) {
 			super(allowedCost);
 		}

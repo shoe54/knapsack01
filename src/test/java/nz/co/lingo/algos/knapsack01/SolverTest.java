@@ -17,11 +17,11 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class SolverTest {
-	static Solver<PriceWeightTuple<Integer>, Product, Tote> s;
+	static Solver<PriceWeightTuple<Integer>, PriceWeightTuple<Double>, Product, Tote> s;
 
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
-		s = new Solver<PriceWeightTuple<Integer>, Product, Tote>() {
+		s = new Solver<PriceWeightTuple<Integer>, PriceWeightTuple<Double>, Product, Tote>() {
 			@Override
 			public void doSolve(List<Product> products, Tote tote) {}
 		};

@@ -16,7 +16,7 @@ public class AppTest {
 	@Test
 	public void testGo() {
 		App app = new App();
-		Set<Item<?>> expected = TestUtil.setOfItems(
+		Set<Item<?, ?>> expected = TestUtil.setOfItems(
 				new Gear(1000, new BigDecimal("25.00")),
 				new Gear(1000, new BigDecimal("1.50")),
 				new Gear(1000, new BigDecimal("12.75")),

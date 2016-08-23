@@ -24,7 +24,7 @@ public class PriceWeightTuple<T extends Number> implements ComplexItemValue<T> {
 	}
 
 	//@Override
-	public PriceWeightTuple<T> add(ComplexItemValue<T> iv) {
+	public PriceWeightTuple<T> add(PriceWeightTuple<T> iv) {
 		PriceWeightTuple<T> toAdd = (PriceWeightTuple<T>) iv;
 		// Note that it is safe to use doubleValue() because whole numbers between -2 pow 53
 		// to 2 pow 53 can be exactly represented by doubles
@@ -43,6 +43,15 @@ public class PriceWeightTuple<T extends Number> implements ComplexItemValue<T> {
 		);
 	}
 
+	public PriceWeightTuple<Double> addDouble(PriceWeightTuple<Double> toAdd) {
+		// Note that it is safe to use doubleValue() because whole numbers between -2 pow 53
+		// to 2 pow 53 can be exactly represented by doubles
+		return new PriceWeightTuple<Double>(
+				this.price.doubleValue() + toAdd.price.doubleValue(), 
+				this.weight.doubleValue() + toAdd.weight.doubleValue()
+		);
+	}
+	
 	//@Override
 	public PriceWeightTuple<T> multiply(int multiplier) {
 		return new PriceWeightTuple(
@@ -52,8 +61,8 @@ public class PriceWeightTuple<T extends Number> implements ComplexItemValue<T> {
 	}
 
 	//@Override
-	public PriceWeightTuple<T> divide(int divisor) {
-		return new PriceWeightTuple(
+	public PriceWeightTuple<Double> divide(int divisor) {
+		return new PriceWeightTuple<Double>(
 				this.price.doubleValue() / divisor, 
 				this.weight.doubleValue() / divisor
 		);
@@ -114,7 +123,7 @@ public class PriceWeightTuple<T extends Number> implements ComplexItemValue<T> {
 	}
 
 	//@Override
-	public ComplexItemValue<Double> toDouble() {
+	public PriceWeightTuple<Double> toDouble() {
 		return new PriceWeightTuple<Double>(this.price.doubleValue(), this.weight.doubleValue());
 	}
 

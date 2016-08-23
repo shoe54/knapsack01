@@ -14,9 +14,9 @@ public class TestUtil {
 		return ret;
 	}*/
 
-	public static Set<Item<?>> setOfItems(Item<?>... items) {
-		Set<Item<?>> ret = new HashSet<>();
-		for (Item<?> p : items)
+	public static Set<Item<?, ?>> setOfItems(Item<?, ?>... items) {
+		Set<Item<?, ?>> ret = new HashSet<>();
+		for (Item<?, ?> p : items)
 			ret.add(p);
 		return ret;
 	}

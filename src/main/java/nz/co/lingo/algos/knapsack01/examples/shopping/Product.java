@@ -7,7 +7,7 @@ import nz.co.lingo.algos.knapsack01.Item;
  * @author Shu
  *
  */
-public class Product extends Cuboid implements Item<PriceWeightTuple<Integer>> {
+public class Product extends Cuboid implements Item<PriceWeightTuple<Integer>, PriceWeightTuple<Double>> {
 	final int id;
 	final int price; //cents
 	final int weight; //grams
@@ -95,7 +95,7 @@ public class Product extends Cuboid implements Item<PriceWeightTuple<Integer>> {
 	}
 
 	@Override
-	public PriceWeightTuple<Integer> divideByCost(PriceWeightTuple<Integer> top) {
+	public PriceWeightTuple<Double> divideByCost(PriceWeightTuple<Integer> top) {
 		return top.divide(getCost());
 	}
 
@@ -109,8 +109,14 @@ public class Product extends Cuboid implements Item<PriceWeightTuple<Integer>> {
 		return getVolume();
 	}
 
-	/*@Override
-	public PriceWeightTuple<Double> getValueZeroAsDouble() {
-		return (PriceWeightTuple<Double>) PriceWeightTuple.ZERO.toDouble();
-	}*/
+	@Override
+	public PriceWeightTuple<Double> addDouble(PriceWeightTuple<Double> d) {
+		return getValue().addDouble(d);
+	}
+
+	@Override
+	public PriceWeightTuple<Double> addDoubles(PriceWeightTuple<Double> a,
+			PriceWeightTuple<Double> b) {
+		return a.add(b);
+	}
 }

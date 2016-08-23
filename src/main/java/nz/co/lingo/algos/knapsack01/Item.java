@@ -16,7 +16,7 @@ package nz.co.lingo.algos.knapsack01;
  *
  * @param <V>
  */
-public interface Item<IV extends Comparable<? super IV>> {
+public interface Item<IV extends Comparable<? super IV>, IVD extends Comparable<? super IVD>> {
 	
 	public static interface ComplexItemValue<VT extends Number> extends Comparable<ComplexItemValue<VT>> {
 	}
@@ -25,7 +25,7 @@ public interface Item<IV extends Comparable<? super IV>> {
 	
 	IV getValue();
 	
-	Comparable<?> valueToDouble(IV v);
+	IVD valueToDouble(IV v);
 
 	IV getValueZero();
 	
@@ -33,10 +33,14 @@ public interface Item<IV extends Comparable<? super IV>> {
 		return addValues(getValue(), a);		
 	}
 
+	IVD addDouble(IVD d);
+
 	IV addValues(IV a, IV b);
 	
+	IVD addDoubles(IVD a, IVD b);
+
 	IV multiplyValue(int multiplier);
 	
-	IV divideByCost(IV top);
+	IVD divideByCost(IV top);
 
 }

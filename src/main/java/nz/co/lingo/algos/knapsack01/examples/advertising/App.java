@@ -3,6 +3,8 @@ package nz.co.lingo.algos.knapsack01.examples.advertising;
 import java.util.Arrays;
 import java.util.stream.Collectors;
 
+import nz.co.lingo.algos.knapsack01.BranchAndBound;
+import nz.co.lingo.algos.knapsack01.BruteForce;
 import nz.co.lingo.algos.knapsack01.DefaultItem;
 import nz.co.lingo.algos.knapsack01.DefaultPool;
 import nz.co.lingo.algos.knapsack01.DynamicProgramming;
@@ -16,28 +18,51 @@ import nz.co.lingo.algos.knapsack01.DynamicProgramming;
  *
  */
 public class App {
+	DefaultItem adPlacement01, adPlacement02, adPlacement03;
+	DefaultPool budget;		
+	
 	public App() {
 		super();
+
+		// Online ad placements
+		adPlacement01 = new DefaultItem(50000, 100000); // $500, 100,000 impressions
+		adPlacement02 = new DefaultItem(60000, 150000); // $600, 150,000 impressions 
+		adPlacement03 = new DefaultItem(75000, 200000); // $750, 200,000 impressions 
+		
+		budget = new DefaultPool(60000);
+		
 	}
 	
-	public DefaultPool go() {
-		// Online ad placements
-		DefaultItem adPlacement01 = new DefaultItem(50000, 100000); // $500, 100,000 impressions
-		DefaultItem adPlacement02 = new DefaultItem(60000, 150000); // $600, 150,000 impressions 
-		DefaultItem adPlacement03 = new DefaultItem(75000, 200000); // $750, 200,000 impressions 
-		
-		DefaultPool budget = new DefaultPool(60000);
-		
-		DynamicProgramming<Integer, DefaultItem, DefaultPool> dp = new DynamicProgramming<Integer, DefaultItem, DefaultPool>();
-		dp.solve(Arrays.asList(adPlacement01, adPlacement02, adPlacement03), budget);
-		
-		return budget;
+	public void goBruteForce(DefaultPool budget) {
+		BruteForce<Integer, Double, DefaultItem, DefaultPool> bf = new BruteForce<>();
+		bf.solve(Arrays.asList(adPlacement01, adPlacement02, adPlacement03), budget);
 	}
 
+	public void goDynamicProgramming(DefaultPool budget) {
+		DynamicProgramming<Integer, Double, DefaultItem, DefaultPool> bf = new DynamicProgramming<>();
+		bf.solve(Arrays.asList(adPlacement01, adPlacement02, adPlacement03), budget);
+	}
+
+	public void goBranchAndBound(DefaultPool budget) {
+		BranchAndBound<Integer, Double, DefaultItem, DefaultPool> bf = new BranchAndBound<>();
+		bf.solve(Arrays.asList(adPlacement01, adPlacement02, adPlacement03), budget);
+	}
+	
 	public static void main(String[] args) {
-		DefaultPool budget = new App().go();
+		App app = new App();
 		
-		System.out.println("Ad placements selected: " + budget.getItems().collect(Collectors.toList()));
+		app.goBruteForce(app.budget);
+		System.out.println("Ad placements selected with BruteForce: " + app.budget.getItems().collect(Collectors.toList()));
+		
+		app.budget.removeAllItems();
+
+		app.goDynamicProgramming(app.budget);
+		System.out.println("Ad placements selected with DynamicProgramming: " + app.budget.getItems().collect(Collectors.toList()));
+		
+		app.budget.removeAllItems();
+
+		app.goBranchAndBound(app.budget);
+		System.out.println("Ad placements selected with BranchAndBound: " + app.budget.getItems().collect(Collectors.toList()));
 	}
 
 }

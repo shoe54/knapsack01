@@ -6,7 +6,12 @@ import java.util.List;
 /**
  * Greedy algorithm
  */
-public class Greedy<IV extends Comparable<? super IV>, I extends Item<IV>, P extends Pool<I>> extends Solver<IV, I, P> {
+public class Greedy<
+		IV extends Comparable<? super IV>, 
+		IVD extends Comparable<? super IVD>, 
+		I extends Item<IV, IVD>, 
+		P extends Pool<IV, IVD, I>> 
+	extends Solver<IV, IVD, I, P> {
 	/**
 	 * Put the most valuable products into tote until it fills up or can't
 	 * fit any more. The most valuable product is one with the highest price

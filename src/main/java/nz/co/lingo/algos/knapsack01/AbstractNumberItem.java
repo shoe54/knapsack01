@@ -1,7 +1,7 @@
 package nz.co.lingo.algos.knapsack01;
 
 
-public abstract class AbstractNumberItem<IV extends Number & Comparable<? super IV>> implements Item<IV> {
+public abstract class AbstractNumberItem<IV extends Number & Comparable<? super IV>> implements Item<IV, Double> {
 	int cost;
 	IV value;
 	
@@ -23,8 +23,13 @@ public abstract class AbstractNumberItem<IV extends Number & Comparable<? super 
 	}
 
 	@Override
-	public Comparable<?> valueToDouble(IV v) {
+	public Double valueToDouble(IV v) {
 		return v.doubleValue();
+	}
+
+	@Override
+	public Double addDoubles(Double a, Double b) {
+		return a + b;
 	}
 
 	@Override

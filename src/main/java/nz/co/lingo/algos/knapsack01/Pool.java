@@ -3,7 +3,7 @@ package nz.co.lingo.algos.knapsack01;
 import java.util.Comparator;
 import java.util.stream.Stream;
 
-public interface Pool<I extends Item<?>> {
+public interface Pool<IV extends Comparable<? super IV>, IVD extends Comparable<? super IVD>, I extends Item<IV, IVD>> {
 
 	boolean addItem(I i);
 	

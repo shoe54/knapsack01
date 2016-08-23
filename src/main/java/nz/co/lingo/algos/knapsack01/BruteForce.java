@@ -12,7 +12,12 @@ import java.util.List;
  * @author Shu
  *
  */
-public class BruteForce<IV extends Comparable<? super IV>, I extends Item<IV>, P extends Pool<I>> extends Solver<IV, I, P> {
+public class BruteForce<
+		IV extends Comparable<? super IV>, 
+		IVD extends Comparable<? super IVD>, 
+		I extends Item<IV, IVD>, 
+		P extends Pool<IV, IVD, I>>
+	extends Solver<IV, IVD, I, P> {
 	/**
 	 * Iterate thru all possible combinations of products in the tote. A
 	 * combination is represented as a series of bits where 0 means the product
