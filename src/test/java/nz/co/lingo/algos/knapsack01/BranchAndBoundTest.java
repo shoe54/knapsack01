@@ -49,7 +49,7 @@ public class BranchAndBoundTest {
 		products.add(p7);
 
 		bnb.doSolve(products, t);
-		assertEquals(TestUtil.setOfProducts(p1), t.getProducts().collect(Collectors.toSet()));
+		assertEquals(TestUtil.setOfItems(p1), t.getProducts().collect(Collectors.toSet()));
 	}
 
 	@Test
@@ -68,7 +68,7 @@ public class BranchAndBoundTest {
 		products.add(p4);
 
 		bnb.doSolve(products, t);
-		assertEquals(TestUtil.setOfProducts(p2,p4), t.getProducts().collect(Collectors.toSet()));
+		assertEquals(TestUtil.setOfItems(p2,p4), t.getProducts().collect(Collectors.toSet()));
 	}
 
 	/**
@@ -86,7 +86,7 @@ public class BranchAndBoundTest {
 		products.add(p2);
 
 		bnb.doSolve(products, t);
-		assertEquals(TestUtil.setOfProducts(p1), t.getProducts().collect(Collectors.toSet()));
+		assertEquals(TestUtil.setOfItems(p1), t.getProducts().collect(Collectors.toSet()));
 		
 		t.removeAllProducts();
 		products.clear();
@@ -94,7 +94,7 @@ public class BranchAndBoundTest {
 		products.add(p1);
 		
 		bnb.doSolve(products, t);
-		assertEquals(TestUtil.setOfProducts(p1), t.getProducts().collect(Collectors.toSet()));
+		assertEquals(TestUtil.setOfItems(p1), t.getProducts().collect(Collectors.toSet()));
 	}
 	
 	/**
@@ -154,16 +154,16 @@ public class BranchAndBoundTest {
 
 		t = new Tote(10, 1, 1); // volume: 10
 		bnb.doSolve(products, t);
-		assertEquals(TestUtil.setOfProducts(p1), t.getProducts().collect(Collectors.toSet()));
+		assertEquals(TestUtil.setOfItems(p1), t.getProducts().collect(Collectors.toSet()));
 
 		t = new Tote(5, 7, 1); // volume: 50
 		bnb.doSolve(products, t);
-		assertEquals(TestUtil.setOfProducts(p1,p19,p21,p11), t.getProducts().collect(Collectors.toSet())); // total price should be 290
+		assertEquals(TestUtil.setOfItems(p1,p19,p21,p11), t.getProducts().collect(Collectors.toSet())); // total price should be 290
 		assertEquals(290, t.getTotalPrice()); // total price should be 290
 
 		t = new Tote(10, 10, 4); // volume: 400
 		bnb.doSolve(products, t);
-		assertEquals(TestUtil.setOfProducts(p1,p2,p3,p4,p5,p7,p11,p16,p17,p18,p19,p21), t.getProducts().collect(Collectors.toSet()));
+		assertEquals(TestUtil.setOfItems(p1,p2,p3,p4,p5,p7,p11,p16,p17,p18,p19,p21), t.getProducts().collect(Collectors.toSet()));
 		assertEquals(1030, t.getTotalPrice());
 	}
 
@@ -191,7 +191,7 @@ public class BranchAndBoundTest {
 		products.add(p1);
 		t.removeAllProducts();
 		bnb.doSolve(products, t);
-		assertEquals(TestUtil.setOfProducts(p1), t.getProducts().collect(Collectors.toSet()));
+		assertEquals(TestUtil.setOfItems(p1), t.getProducts().collect(Collectors.toSet()));
 	}
 
 	/**
@@ -213,7 +213,7 @@ public class BranchAndBoundTest {
 		products.add(p4);
 
 		bnb.doSolve(products, t);
-		assertEquals(TestUtil.setOfProducts(p1,p3), t.getProducts().collect(Collectors.toSet()));
+		assertEquals(TestUtil.setOfItems(p1,p3), t.getProducts().collect(Collectors.toSet()));
 	}
 
 	@Test

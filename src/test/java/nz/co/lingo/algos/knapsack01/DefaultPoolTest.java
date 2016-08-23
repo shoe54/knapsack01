@@ -13,53 +13,53 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class DefaultPoolTest {
-	static DefaultPool dp1, dp2, dp3, dp4, dp5, dp6, dp7, dp8, dp9;
+	static DefaultPool t1, t2, t3, t4, t5, t6, t7, t8, t9;
 
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
-		dp1 = new DefaultPool(10);
-		dp2 = new DefaultPool(5);
-		dp3 = new DefaultPool(9);
-		dp4 = new DefaultPool(9);
-		dp5 = new DefaultPool(11);
-		dp5.addItem(new DefaultItem(11, 12));
-		dp6 = new DefaultPool(11);
-		dp6.addItem(new DefaultItem(11, 12));
-		dp7 = new DefaultPool(12);
-		dp7.addItem(new DefaultItem(12, 13));
-		dp8 = new DefaultPool(12);
-		dp8.addItem(new DefaultItem(2, 2));
-		dp9 = new DefaultPool(19);
-		dp9.addItem(new DefaultItem(12, 13));
+		t1 = new DefaultPool(10);
+		t2 = new DefaultPool(5);
+		t3 = new DefaultPool(9);
+		t4 = new DefaultPool(9);
+		t5 = new DefaultPool(11);
+		t5.addItem(new DefaultItem(11, 12));
+		t6 = new DefaultPool(11);
+		t6.addItem(new DefaultItem(11, 12));
+		t7 = new DefaultPool(12);
+		t7.addItem(new DefaultItem(12, 13));
+		t8 = new DefaultPool(12);
+		t8.addItem(new DefaultItem(2, 2));
+		t9 = new DefaultPool(19);
+		t9.addItem(new DefaultItem(12, 13));
 	}
 
 	@Test
 	public void testHashCode() {
-		assertNotEquals(dp1, dp2);
-		assertNotEquals(dp2, dp3);
-		assertEquals(dp3, dp4);
-		assertEquals(dp4, dp3);
-		assertNotEquals(dp4, dp5);
-		assertEquals(dp5, dp6);
-		assertNotEquals(dp6, dp7);
+		assertNotEquals(t1, t2);
+		assertNotEquals(t2, t3);
+		assertEquals(t3, t4);
+		assertEquals(t4, t3);
+		assertNotEquals(t4, t5);
+		assertEquals(t5, t6);
+		assertNotEquals(t6, t7);
 	}
 
 	@Test
 	public void testDefaultPool() {
-		assertEquals(10, dp1.allowedCost);
-		assertEquals(5, dp2.allowedCost);
-		assertEquals(9, dp3.allowedCost);
-		assertEquals(9, dp4.allowedCost);
-		assertEquals(11, dp5.allowedCost);
-		assertEquals(11, dp6.allowedCost);
-		assertEquals(12, dp7.allowedCost);
-		assertEquals(Collections.EMPTY_SET, dp1.items);
-		assertEquals(Collections.EMPTY_SET, dp2.items);
-		assertEquals(Collections.EMPTY_SET, dp3.items);
-		assertEquals(Collections.EMPTY_SET, dp4.items);
-		assertEquals(TestUtil.setOfDefaultItems(new DefaultItem(11, 12)), dp5.items);
-		assertEquals(TestUtil.setOfDefaultItems(new DefaultItem(11, 12)), dp6.items);
-		assertEquals(TestUtil.setOfDefaultItems(new DefaultItem(12, 13)), dp7.items);
+		assertEquals(10, t1.allowedCost);
+		assertEquals(5, t2.allowedCost);
+		assertEquals(9, t3.allowedCost);
+		assertEquals(9, t4.allowedCost);
+		assertEquals(11, t5.allowedCost);
+		assertEquals(11, t6.allowedCost);
+		assertEquals(12, t7.allowedCost);
+		assertEquals(Collections.EMPTY_SET, t1.items);
+		assertEquals(Collections.EMPTY_SET, t2.items);
+		assertEquals(Collections.EMPTY_SET, t3.items);
+		assertEquals(Collections.EMPTY_SET, t4.items);
+		assertEquals(TestUtil.setOfItems(new DefaultItem(11, 12)), t5.items);
+		assertEquals(TestUtil.setOfItems(new DefaultItem(11, 12)), t6.items);
+		assertEquals(TestUtil.setOfItems(new DefaultItem(12, 13)), t7.items);
 	}
 
 	@Test
@@ -67,25 +67,25 @@ public class DefaultPoolTest {
 		DefaultPool dpTest = new DefaultPool(10);
 		boolean ret;
 		ret = dpTest.addItem(new DefaultItem(5, 6));
-		assertEquals(TestUtil.setOfDefaultItems(new DefaultItem(5, 6)), dpTest.items);
+		assertEquals(TestUtil.setOfItems(new DefaultItem(5, 6)), dpTest.items);
 		assertTrue(ret);
 		ret = dpTest.addItem(new DefaultItem(3, 4));
-		assertEquals(TestUtil.setOfDefaultItems(
+		assertEquals(TestUtil.setOfItems(
 				new DefaultItem(3, 4), new DefaultItem(5, 6)), dpTest.items);
 		assertTrue(ret);
 		ret = dpTest.addItem(new DefaultItem(1, 1));
-		assertEquals(TestUtil.setOfDefaultItems(
+		assertEquals(TestUtil.setOfItems(
 				new DefaultItem(3, 4), new DefaultItem(5, 6), new DefaultItem(1, 1)), dpTest.items);
 		assertTrue(ret);
 		ret = dpTest.addItem(new DefaultItem(3, 3));
-		assertEquals(TestUtil.setOfDefaultItems(
+		assertEquals(TestUtil.setOfItems(
 				new DefaultItem(3, 4), new DefaultItem(5, 6), new DefaultItem(1, 1)), dpTest.items);
 		assertFalse(ret);
 	}
 
 	@Test(expected=IllegalArgumentException.class)
 	public void testAddItem02() {
-		dp1.addItem(null);
+		t1.addItem(null);
 	}
 
 	@Test
@@ -102,7 +102,7 @@ public class DefaultPoolTest {
 
 	@Test
 	public void testGetValueToCostRatioComparator() {
-		Comparator<DefaultItem> comparator = dp1.getValueToCostRatioComparator();
+		Comparator<DefaultItem> comparator = t1.getValueToCostRatioComparator();
 		assertEquals(0, comparator.compare(new DefaultItem(11, 12), new DefaultItem(11, 12)));
 		assertTrue(comparator.compare(new DefaultItem(11, 13), new DefaultItem(11, 12)) > 0);
 		assertTrue(comparator.compare(new DefaultItem(11, 11), new DefaultItem(11, 12)) < 0);
@@ -110,34 +110,34 @@ public class DefaultPoolTest {
 
 	@Test
 	public void testGetAllowedCost() {
-		assertEquals(10, dp1.getAllowedCost());
-		assertEquals(5, dp2.getAllowedCost());
-		assertEquals(9, dp3.getAllowedCost());
-		assertEquals(9, dp4.getAllowedCost());
-		assertEquals(11, dp5.getAllowedCost());
-		assertEquals(11, dp6.getAllowedCost());
-		assertEquals(12, dp7.getAllowedCost());
+		assertEquals(10, t1.getAllowedCost());
+		assertEquals(5, t2.getAllowedCost());
+		assertEquals(9, t3.getAllowedCost());
+		assertEquals(9, t4.getAllowedCost());
+		assertEquals(11, t5.getAllowedCost());
+		assertEquals(11, t6.getAllowedCost());
+		assertEquals(12, t7.getAllowedCost());
 	}
 
 	@Test
 	public void testGetItems() {
-		assertEquals(Collections.EMPTY_SET, dp1.getItems().collect(Collectors.toSet()));
-		assertEquals(TestUtil.setOfDefaultItems(new DefaultItem(11, 12)), dp5.getItems().collect(Collectors.toSet()));
-		assertEquals(TestUtil.setOfDefaultItems(new DefaultItem(12, 13)), dp7.getItems().collect(Collectors.toSet()));
+		assertEquals(Collections.EMPTY_SET, t1.getItems().collect(Collectors.toSet()));
+		assertEquals(TestUtil.setOfItems(new DefaultItem(11, 12)), t5.getItems().collect(Collectors.toSet()));
+		assertEquals(TestUtil.setOfItems(new DefaultItem(12, 13)), t7.getItems().collect(Collectors.toSet()));
 	}
 
 	@Test
 	public void testEqualsObject() {
-		assertFalse(dp1.equals(dp2));
-		assertFalse(dp2.equals(dp3));
-		assertTrue(dp3.equals(dp4));
-		assertTrue(dp4.equals(dp3));
-		assertFalse(dp4.equals(dp5));
-		assertTrue(dp5.equals(dp6));
-		assertFalse(dp6.equals(dp7));
-		assertFalse(dp7.equals(dp8));
-		assertFalse(dp7.equals(dp9));
-		assertFalse(dp9.equals(dp7));
+		assertFalse(t1.equals(t2));
+		assertFalse(t2.equals(t3));
+		assertTrue(t3.equals(t4));
+		assertTrue(t4.equals(t3));
+		assertFalse(t4.equals(t5));
+		assertTrue(t5.equals(t6));
+		assertFalse(t6.equals(t7));
+		assertFalse(t7.equals(t8));
+		assertFalse(t7.equals(t9));
+		assertFalse(t9.equals(t7));
 	}
 
 }

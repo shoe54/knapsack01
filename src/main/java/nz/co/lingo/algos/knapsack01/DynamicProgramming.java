@@ -7,6 +7,8 @@ import java.util.List;
  * 
  * Time complexity is O(n * tote volume)
  * 
+ * TODO: Make a primitive int version of this which consumes less memory
+ * 
  * @author Shu
  *
  */

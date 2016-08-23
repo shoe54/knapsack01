@@ -45,7 +45,7 @@ public class BruteForceTest {
 		products.add(p7);
 
 		bf.doSolve(products, t);
-		assertEquals(TestUtil.setOfProducts(p1), t.getProducts().collect(Collectors.toSet()));
+		assertEquals(TestUtil.setOfItems(p1), t.getProducts().collect(Collectors.toSet()));
 	}
 
 	@Test
@@ -64,7 +64,7 @@ public class BruteForceTest {
 		products.add(p4);
 
 		bf.doSolve(products, t);
-		assertEquals(TestUtil.setOfProducts(p2,p4), t.getProducts().collect(Collectors.toSet()));
+		assertEquals(TestUtil.setOfItems(p2,p4), t.getProducts().collect(Collectors.toSet()));
 	}
 
 	/**
@@ -82,7 +82,7 @@ public class BruteForceTest {
 		products.add(p2);
 
 		bf.doSolve(products, t);
-		assertEquals(TestUtil.setOfProducts(p1), t.getProducts().collect(Collectors.toSet()));
+		assertEquals(TestUtil.setOfItems(p1), t.getProducts().collect(Collectors.toSet()));
 		
 		t.removeAllProducts();
 		products.clear();
@@ -90,7 +90,7 @@ public class BruteForceTest {
 		products.add(p1);
 		
 		bf.doSolve(products, t);
-		assertEquals(TestUtil.setOfProducts(p1), t.getProducts().collect(Collectors.toSet()));
+		assertEquals(TestUtil.setOfItems(p1), t.getProducts().collect(Collectors.toSet()));
 	}
 	
 	/**
@@ -148,7 +148,7 @@ public class BruteForceTest {
 		products.add(p22);
 
 		bf.doSolve(products, t);
-		assertEquals(TestUtil.setOfProducts(p1,p2,p3,p4,p5,p7,p11,p16,p17,p18,p19,p21), t.getProducts().collect(Collectors.toSet()));
+		assertEquals(TestUtil.setOfItems(p1,p2,p3,p4,p5,p7,p11,p16,p17,p18,p19,p21), t.getProducts().collect(Collectors.toSet()));
 	}
 
 	/**
@@ -178,6 +178,6 @@ public class BruteForceTest {
 		products.add(p1);
 		t.removeAllProducts();
 		bf.doSolve(products, t);
-		assertEquals(TestUtil.setOfProducts(p1), t.getProducts().collect(Collectors.toSet()));
+		assertEquals(TestUtil.setOfItems(p1), t.getProducts().collect(Collectors.toSet()));
 	}
 }

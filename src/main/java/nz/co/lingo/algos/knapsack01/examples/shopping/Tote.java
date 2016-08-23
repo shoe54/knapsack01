@@ -33,13 +33,6 @@ public class Tote extends Cuboid implements Pool<Product> {
 		return products.stream();
 	}
 
-	@Override
-	public String toString() {
-		return "Tote [products=" + products + ", getLength()=" + getLength()
-				+ ", getWidth()=" + getWidth() + ", getHeight()=" + getHeight()
-				+ ", getVolume()=" + getVolume() + "]";
-	}
-
 	public void removeAllProducts() {
 		products.clear();
 	}
@@ -65,6 +58,11 @@ public class Tote extends Cuboid implements Pool<Product> {
 	}
 
 	@Override
+	public Stream<Product> getItems() {
+		return getProducts();
+	}
+	
+	@Override
 	public Comparator<Product> getValueToCostRatioComparator() {
 		return new PriceToVolumeRatioComparator();
 	}
@@ -75,8 +73,10 @@ public class Tote extends Cuboid implements Pool<Product> {
 	}
 
 	@Override
-	public Stream<Product> getItems() {
-		return getProducts();
+	public String toString() {
+		return "Tote [products=" + products + ", getLength()=" + getLength()
+				+ ", getWidth()=" + getWidth() + ", getHeight()=" + getHeight()
+				+ ", getVolume()=" + getVolume() + "]";
 	}
-	
+
 }

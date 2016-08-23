@@ -60,7 +60,7 @@ public class DynamicProgrammingTest {
 		products.add(p7);
 
 		dp.doSolve(products, t);
-		assertEquals(TestUtil.setOfProducts(p6,p7), t.getProducts().collect(Collectors.toSet()));
+		assertEquals(TestUtil.setOfItems(p6,p7), t.getProducts().collect(Collectors.toSet()));
 	}
 
 	/**
@@ -90,7 +90,7 @@ public class DynamicProgrammingTest {
 		products.add(p4);
 
 		dp.doSolve(products, t);
-		assertEquals(TestUtil.setOfProducts(p2,p4), t.getProducts().collect(Collectors.toSet()));
+		assertEquals(TestUtil.setOfItems(p2,p4), t.getProducts().collect(Collectors.toSet()));
 	}
 
 	/**
@@ -108,7 +108,7 @@ public class DynamicProgrammingTest {
 		products.add(p2);
 
 		dp.doSolve(products, t);
-		assertEquals(TestUtil.setOfProducts(p1), t.getProducts().collect(Collectors.toSet()));
+		assertEquals(TestUtil.setOfItems(p1), t.getProducts().collect(Collectors.toSet()));
 		
 		t.removeAllProducts();
 		products.clear();
@@ -116,7 +116,7 @@ public class DynamicProgrammingTest {
 		products.add(p1);
 		
 		dp.doSolve(products, t);
-		assertEquals(TestUtil.setOfProducts(p1), t.getProducts().collect(Collectors.toSet()));
+		assertEquals(TestUtil.setOfItems(p1), t.getProducts().collect(Collectors.toSet()));
 	}
 
 	/**
@@ -174,7 +174,7 @@ public class DynamicProgrammingTest {
 		products.add(p22);
 
 		dp.doSolve(products, t);
-		assertEquals(TestUtil.setOfProducts(p1,p2,p3,p4,p5,p7,p11,p16,p17,p18,p19,p21), t.getProducts().collect(Collectors.toSet()));
+		assertEquals(TestUtil.setOfItems(p1,p2,p3,p4,p5,p7,p11,p16,p17,p18,p19,p21), t.getProducts().collect(Collectors.toSet()));
 	}
 
 	/**
@@ -204,6 +204,6 @@ public class DynamicProgrammingTest {
 		products.add(p1);
 		t.removeAllProducts();
 		dp.doSolve(products, t);
-		assertEquals(TestUtil.setOfProducts(p1), t.getProducts().collect(Collectors.toSet()));
+		assertEquals(TestUtil.setOfItems(p1), t.getProducts().collect(Collectors.toSet()));
 	}
 }

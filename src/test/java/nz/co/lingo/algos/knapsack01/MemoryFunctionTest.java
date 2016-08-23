@@ -45,7 +45,7 @@ public class MemoryFunctionTest {
 		products.add(p7);
 
 		mf.doSolve(products, t);
-		assertEquals(TestUtil.setOfProducts(p1), t.getProducts().collect(Collectors.toSet()));
+		assertEquals(TestUtil.setOfItems(p1), t.getProducts().collect(Collectors.toSet()));
 	}
 
 	@Test
@@ -64,7 +64,7 @@ public class MemoryFunctionTest {
 		products.add(p4);
 
 		mf.doSolve(products, t);
-		assertEquals(TestUtil.setOfProducts(p2,p4), t.getProducts().collect(Collectors.toSet()));
+		assertEquals(TestUtil.setOfItems(p2,p4), t.getProducts().collect(Collectors.toSet()));
 	}
 
 	/**
@@ -82,7 +82,7 @@ public class MemoryFunctionTest {
 		products.add(p2);
 
 		mf.doSolve(products, t);
-		assertEquals(TestUtil.setOfProducts(p1), t.getProducts().collect(Collectors.toSet()));
+		assertEquals(TestUtil.setOfItems(p1), t.getProducts().collect(Collectors.toSet()));
 		
 		t.removeAllProducts();
 		products.clear();
@@ -90,7 +90,7 @@ public class MemoryFunctionTest {
 		products.add(p1);
 		
 		mf.doSolve(products, t);
-		assertEquals(TestUtil.setOfProducts(p1), t.getProducts().collect(Collectors.toSet()));
+		assertEquals(TestUtil.setOfItems(p1), t.getProducts().collect(Collectors.toSet()));
 	}
 	
 	/**
@@ -148,7 +148,7 @@ public class MemoryFunctionTest {
 		products.add(p22);
 
 		mf.doSolve(products, t);
-		assertEquals(TestUtil.setOfProducts(p1,p2,p3,p4,p5,p7,p11,p16,p17,p18,p19,p21), t.getProducts().collect(Collectors.toSet()));
+		assertEquals(TestUtil.setOfItems(p1,p2,p3,p4,p5,p7,p11,p16,p17,p18,p19,p21), t.getProducts().collect(Collectors.toSet()));
 	}
 
 	/**
@@ -178,7 +178,7 @@ public class MemoryFunctionTest {
 		products.add(p1);
 		t.removeAllProducts();
 		mf.doSolve(products, t);
-		assertEquals(TestUtil.setOfProducts(p1), t.getProducts().collect(Collectors.toSet()));
+		assertEquals(TestUtil.setOfItems(p1), t.getProducts().collect(Collectors.toSet()));
 	}
 
 }

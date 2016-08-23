@@ -20,10 +20,10 @@ to/from the Pool depending on how you are interpreting the particular knapsack p
 Several examples on using this library are provided, listed in order of increasing complexity:
 
 * An example of allocating advertising budget (`Pool`) to online ad spending (`Item`s). The value of the online ad spend in the expected number of ad impressions. The cost is the price of the ad spend. main() is in `nz.co.lingo.algos.knapsack01.examples.advertising.App`
-* A traditional knapsack example where `Item` value is the dollar price and cost is the weight. main() is in `TODO`
+* A traditional 0/1 knapsack example where `Item` value is the dollar price and cost is the weight. main() is in `nz.co.lingo.algos.knapsack01.examples.knapsack.App`
 * A more complex example. This example is a solution to the problem described at http://geeks.redmart.com/2015/10/26/1000000th-customer-prize-another-programming-challenge/ . main() is at `nz.co.lingo.algos.knapsack01.examples.shopping.App`
 
-An `Item`'s value can be a more complex object instead of just a Number. This is represented by the `ComplexItemValue` interface. This allows the delegation of value comparisons to your own implementations. For simple `Item`s with Integer values a `DefaultItem` class is provided for convenience.
+An `Item`'s value can be a more complex object instead of just a Number. This is represented by the `ComplexItemValue` interface. This allows the delegation of value comparisons to your own implementations. For simple `Item`s with Integer values the `DefaultItem` and `DefaultPool` classes are provided for convenience. Other items with numeric values can be subclassed from `AbstractNumberItem`.
 
 ## Pre-requisites
 
@@ -38,11 +38,13 @@ An `Item`'s value can be a more complex object instead of just a Number. This is
 
 After building via `mvn package`, `cd` to the `target` directory and run one of the following:
 
+* Advertising budget example: `java -cp knapsack01-0.0.3-SNAPSHOT-jar-with-dependencies.jar nz.co.lingo.algos.knapsack01.examples.advertising.App`
+* Knapsack example: `java -cp knapsack01-0.0.3-SNAPSHOT-jar-with-dependencies.jar nz.co.lingo.algos.knapsack01.examples.knapsack.App`
 * Shopping example: `java -cp knapsack01-0.0.3-SNAPSHOT-jar-with-dependencies.jar nz.co.lingo.algos.knapsack01.examples.shopping.App .\classes\nz\co\lingo\algos\knapsack01\examples\shopping\products.csv BranchAndBound` to get the answer to the challenge.
     * The general form for this example is:
 
-    cd ./target
-    java [-Xmx6144m] [-Xss8m] -cp knapsack01-0.0.3-SNAPSHOT-jar-with-dependencies.jar nz.co.lingo.algos.knapsack01.examples.shopping.App <csv file path> [algorithm]
+`cd ./target`
+`java [-Xmx6144m] [-Xss8m] -cp knapsack01-0.0.3-SNAPSHOT-jar-with-dependencies.jar nz.co.lingo.algos.knapsack01.examples.shopping.App <csv file path> [algorithm]`
 
     * Where `algorithm` is one of `Greedy`, `DynamicProgramming`, `MemoryFunction`, `BranchAndBound`, or `BruteForce`. If you run BruteForce you won't get to see the results. If algorithm is omitted, all algorithms are run except BruteForce.
     * You will only need the -Xmx6144m and -Xss8m parameters if you want to run the Dynamic Programming or Memory Function algorithms. The -Xss option is required only for Memory Function. More heap space improves the performance of these algorithms. 

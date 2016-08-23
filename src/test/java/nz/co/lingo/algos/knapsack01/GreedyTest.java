@@ -51,19 +51,19 @@ public class GreedyTest {
 
 		t = new Tote(20, 30, 25); // volume: 21000
 		g.doSolve(products, t);
-		assertEquals(TestUtil.setOfProducts(p1,p2,p3,p4,p5,p6,p7), t.getProducts().collect(Collectors.toSet()));
+		assertEquals(TestUtil.setOfItems(p1,p2,p3,p4,p5,p6,p7), t.getProducts().collect(Collectors.toSet()));
 		
 		t = new Tote(1, 10, 554); // volume: 5540
 		g.doSolve(products, t);
-		assertEquals(TestUtil.setOfProducts(p1,p2,p3), t.getProducts().collect(Collectors.toSet()));
+		assertEquals(TestUtil.setOfItems(p1,p2,p3), t.getProducts().collect(Collectors.toSet()));
 
 		t = new Tote(1, 10, 553); // volume: 5530
 		g.doSolve(products, t);
-		assertEquals(TestUtil.setOfProducts(p1,p2,p7), t.getProducts().collect(Collectors.toSet()));
+		assertEquals(TestUtil.setOfItems(p1,p2,p7), t.getProducts().collect(Collectors.toSet()));
 
 		t = new Tote(1, 10, 555); // volume: 5550
 		g.doSolve(products, t);
-		assertEquals(TestUtil.setOfProducts(p1,p2,p3), t.getProducts().collect(Collectors.toSet()));
+		assertEquals(TestUtil.setOfItems(p1,p2,p3), t.getProducts().collect(Collectors.toSet()));
 	}
 	
 	/**
@@ -92,7 +92,7 @@ public class GreedyTest {
 		products.add(p4);
 
 		g.doSolve(products, t);
-		assertEquals(TestUtil.setOfProducts(p1), t.getProducts().collect(Collectors.toSet()));
+		assertEquals(TestUtil.setOfItems(p1), t.getProducts().collect(Collectors.toSet()));
 	
 	}
 
@@ -111,6 +111,6 @@ public class GreedyTest {
 		products.add(p1);
 		t.removeAllProducts();
 		g.doSolve(products, t);
-		assertEquals(TestUtil.setOfProducts(p1), t.getProducts().collect(Collectors.toSet()));
+		assertEquals(TestUtil.setOfItems(p1), t.getProducts().collect(Collectors.toSet()));
 	}
 }

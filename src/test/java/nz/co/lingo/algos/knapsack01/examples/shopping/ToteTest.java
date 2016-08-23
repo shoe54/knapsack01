@@ -127,27 +127,27 @@ public class ToteTest {
 		
 		ret = t.addItem(p1);
 		assertTrue(ret);
-		assertEquals(TestUtil.setOfProducts(p1), t.products);
+		assertEquals(TestUtil.setOfItems(p1), t.products);
 		
 		ret = t.addItem(p2);
 		assertTrue(ret);
-		assertEquals(TestUtil.setOfProducts(p1,p2), t.products);
+		assertEquals(TestUtil.setOfItems(p1,p2), t.products);
 		
 		ret = t.addItem(p3);
 		assertTrue(ret);
-		assertEquals(TestUtil.setOfProducts(p1,p2,p3), t.products);
+		assertEquals(TestUtil.setOfItems(p1,p2,p3), t.products);
 		
 		ret = t.addItem(p4);
 		assertTrue(ret);
-		assertEquals(TestUtil.setOfProducts(p1,p2,p3,p4), t.products);
+		assertEquals(TestUtil.setOfItems(p1,p2,p3,p4), t.products);
 		
 		ret = t.addItem(p5);
 		assertFalse(ret);
-		assertEquals(TestUtil.setOfProducts(p1,p2,p3,p4), t.products);
+		assertEquals(TestUtil.setOfItems(p1,p2,p3,p4), t.products);
 
 		ret = t.addItem(p6);
 		assertTrue(ret);
-		assertEquals(TestUtil.setOfProducts(p1,p2,p3,p4,p5,p6), t.products);
+		assertEquals(TestUtil.setOfItems(p1,p2,p3,p4,p5,p6), t.products);
 	}
 
 	@Test
