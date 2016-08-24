@@ -11,6 +11,8 @@ public class DefaultItem extends AbstractNumberItem<Integer> {
 
 	public DefaultItem(int cost, Integer value) {
 		super(cost, value);
+		if (cost < 0 || value < 0)
+			throw new IllegalArgumentException("Negative cost or value not allowed");
 	}
 
 	@Override
@@ -25,7 +27,7 @@ public class DefaultItem extends AbstractNumberItem<Integer> {
 
 	@Override
 	public Integer multiplyValue(int multiplier) {
-		return getValue() * multiplier;
+		return Math.multiplyExact(getValue(), multiplier);
 	}
 
 	@Override

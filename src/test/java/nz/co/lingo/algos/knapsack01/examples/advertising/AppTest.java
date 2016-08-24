@@ -16,7 +16,7 @@ public class AppTest {
 	@Test
 	public void testGo() {
 		App app = new App();
-		Set<Item<?, ?>> expected = TestUtil.setOfItems(new DefaultItem(60000, 150000));
+		Set<Item<?, ?>> expected = TestUtil.setOfItems(new DefaultItem(40000, 15000));
 		app.goBruteForce(app.budget);
 		assertEquals(expected, app.budget.getItems().collect(Collectors.toSet()));
 		

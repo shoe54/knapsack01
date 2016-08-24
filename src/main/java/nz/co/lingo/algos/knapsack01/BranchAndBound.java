@@ -193,8 +193,8 @@ public class BranchAndBound<
 			k = j;
 			if (k <= items.size()) {
 				I item = items.get(k-1);
-				int remainingVolume = pool.getAllowedCost() - totalVolume;
-				IVD fraction = item.divideByCost(item.multiplyValue(remainingVolume));
+				int remainingCost = pool.getAllowedCost() - totalVolume;
+				IVD fraction = item.divideByCost(item.multiplyValue(remainingCost));
 				result = item.addDoubles(result, fraction);
 			}
 			

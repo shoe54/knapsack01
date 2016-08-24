@@ -25,11 +25,11 @@ public class App {
 		super();
 
 		// Online ad placements
-		adPlacement01 = new DefaultItem(50000, 100000); // $500, 100,000 impressions
-		adPlacement02 = new DefaultItem(60000, 150000); // $600, 150,000 impressions 
-		adPlacement03 = new DefaultItem(75000, 200000); // $750, 200,000 impressions 
+		adPlacement01 = new DefaultItem(30000, 10000); // $300, 10,000 impressions
+		adPlacement02 = new DefaultItem(40000, 15000); // $400, 15,000 impressions 
+		adPlacement03 = new DefaultItem(55000, 20000); // $550, 20,000 impressions 
 		
-		budget = new DefaultPool(60000);
+		budget = new DefaultPool(40000);
 		
 	}
 	

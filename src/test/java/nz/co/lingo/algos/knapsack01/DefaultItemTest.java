@@ -43,6 +43,16 @@ public class DefaultItemTest {
 		new DefaultItem(9, null);
 	}
 
+	@Test(expected=IllegalArgumentException.class)
+	public void testDefaultItem03() {
+		new DefaultItem(-1, 1);
+	}
+
+	@Test(expected=IllegalArgumentException.class)
+	public void testDefaultItem04() {
+		new DefaultItem(1, -1);
+	}
+
 	@Test
 	public void testGetCost() {
 		assertEquals(10, t1.getCost());
@@ -109,11 +119,16 @@ public class DefaultItemTest {
 	}
 
 	@Test
-	public void testMultiplyValue() {
+	public void testMultiplyValue01() {
 		assertEquals(new Integer(15), t1.multiplyValue(3));
 		assertEquals(new Integer(20), t2.multiplyValue(2));
 		assertEquals(new Integer(0), t3.multiplyValue(0));
 		assertEquals(new Integer(-9), t4.multiplyValue(-1));
+	}
+
+	@Test(expected=ArithmeticException.class)
+	public void testMultiplyValue02() {
+		new DefaultItem(10, 999999999).multiplyValue(99999999);
 	}
 
 	@Test
