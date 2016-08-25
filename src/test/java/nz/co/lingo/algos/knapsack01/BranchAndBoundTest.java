@@ -27,8 +27,6 @@ public class BranchAndBoundTest {
 
 	@Test
 	public void testMaximizeMyShopping01() {
-		// TODO add tests using DefaultItem
-		
 		List<Product> products = new ArrayList<>();
 		Tote t = new Tote(10, 12, 14); // Volume: 1680
 		
@@ -217,6 +215,11 @@ public class BranchAndBoundTest {
 	}
 
 	@Test
+	public void testMaximizeMyShopping08() {
+		// TODO add tests using IntValueItem
+	}
+	
+	@Test
 	public void testBound01() {
 		Tote t = new Tote(10, 1, 1); // volume: 10
 		List<Product> products = new ArrayList<>();
@@ -294,4 +297,10 @@ public class BranchAndBoundTest {
 		assertEquals(221.6013, result.getPrice().doubleValue(), 0.0001);
 		assertEquals(21.8300, result.getWeight().doubleValue(), 0.0001);
 	}
+
+	@Test
+	public void testBound03() {
+		// TODO add tests using IntValueItem
+	}
+	
 }

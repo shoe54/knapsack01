@@ -7,11 +7,11 @@ import java.util.PriorityQueue;
 /**
  * Best-first search Branch and Bound implementation. The Items's "value" object
  * is used as the algorithm's upper bound value. I delegate to the Item's "value" object to 
- * determine what is considered "better" or "more valuable", e.g. higher price first 
- * followed by lower weight first. Like Brute Force, B and B provides the global optimum 
- * solution. Unlike Brute Force, it has the intelligence to avoid searching thru 
- * unpromising branches of the tree. This can give the algorithm a huge time cost savings 
- * depending on the nature of the input data.
+ * determine what is considered "better" or "more valuable", e.g. in the case of 
+ * ComplexItemValues higher value first followed by lower cost first. Like Brute Force, 
+ * B and B provides the global optimum solution. Unlike Brute Force, it has the intelligence 
+ * to avoid searching thru unpromising branches of the tree. This can give the algorithm a 
+ * huge time cost savings depending on the nature of the input data.
  * 
  * At any point on the tree, a Node's cost is the total of its own cost and the cost
  * of all its parent Nodes that are considered included in the search result. The Node's 
@@ -98,7 +98,6 @@ public class BranchAndBound<
 		// maximum possible value for that branch
 		items.sort(Collections.reverseOrder(pool.getValueToCostRatioComparator()));
 
-		//public static final Node ZERO = new Node(0,PriceWeightTuple.ZERO,0,null); 
 		final Node<IV, IVD> ZERO = getZeroNode(items.get(0).getValueZero());
 		Node<IV, IVD> best = ZERO,
 			 u = ZERO, 
@@ -171,21 +170,21 @@ public class BranchAndBound<
 	 */
 	IVD bound(Node<IV, IVD> u, P pool, List<I> items) {
 		int j, k;
-		int totalVolume;
+		int totalCost;
 		IVD result;
 		
 		if (u.cost >= pool.getAllowedCost())
 			return items.get(0).valueToDouble(items.get(0).getValueZero());
 		else {
 			result = (IVD) items.get(0).valueToDouble(u.value); // Get a real number representation of the item value
-			//result = u.value.toDouble(); // Get a real number representation of PriceWeightTuple
+			//result = u.value.toDouble(); // Get a real number representation of the item value
 			j = u.level + 1;
-			totalVolume = u.cost;
+			totalCost = u.cost;
 			// Iterate thru items. Stop iterating when the whole item does not fit in pool
 			while (j <= items.size() 
-					&& totalVolume + items.get(j-1).getCost() <= pool.getAllowedCost()) {
+					&& totalCost + items.get(j-1).getCost() <= pool.getAllowedCost()) {
 				I item = items.get(j-1);
-				totalVolume += item.getCost();
+				totalCost += item.getCost();
 				result = item.addDouble(result);
 				j++;
 			}
@@ -193,7 +192,7 @@ public class BranchAndBound<
 			k = j;
 			if (k <= items.size()) {
 				I item = items.get(k-1);
-				int remainingCost = pool.getAllowedCost() - totalVolume;
+				int remainingCost = pool.getAllowedCost() - totalCost;
 				IVD fraction = item.divideByCost(item.multiplyValue(remainingCost));
 				result = item.addDoubles(result, fraction);
 			}

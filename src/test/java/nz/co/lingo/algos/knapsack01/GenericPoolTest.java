@@ -4,7 +4,6 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
 
 import java.util.Collections;
 import java.util.Comparator;
@@ -12,17 +11,16 @@ import java.util.stream.Collectors;
 
 import nz.co.lingo.algos.knapsack01.examples.shopping.TestUtil;
 
-import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-public class AbstractPoolTest {
-	public static class Target extends GenericPool<Integer, Double, DefaultItem> {
+public class GenericPoolTest {
+	public static class Target extends GenericPool<Integer, Double, IntValueItem> {
 		public Target(int allowedCost) {
 			super(allowedCost);
 		}
 		@Override
-		public Comparator<DefaultItem> getValueToCostRatioComparator() {
+		public Comparator<IntValueItem> getValueToCostRatioComparator() {
 			throw new RuntimeException();
 		}
 	}
@@ -36,15 +34,15 @@ public class AbstractPoolTest {
 		t3 = new Target(9);
 		t4 = new Target(9);
 		t5 = new Target(11);
-		t5.addItem(new DefaultItem(11, 12));
+		t5.addItem(new IntValueItem(11, 12));
 		t6 = new Target(11);
-		t6.addItem(new DefaultItem(11, 12));
+		t6.addItem(new IntValueItem(11, 12));
 		t7 = new Target(12);
-		t7.addItem(new DefaultItem(12, 13));
+		t7.addItem(new IntValueItem(12, 13));
 		t8 = new Target(12);
-		t8.addItem(new DefaultItem(2, 2));
+		t8.addItem(new IntValueItem(2, 2));
 		t9 = new Target(19);
-		t9.addItem(new DefaultItem(12, 13));
+		t9.addItem(new IntValueItem(12, 13));
 	}
 
 	@Test
@@ -71,29 +69,29 @@ public class AbstractPoolTest {
 		assertEquals(Collections.EMPTY_SET, t2.items);
 		assertEquals(Collections.EMPTY_SET, t3.items);
 		assertEquals(Collections.EMPTY_SET, t4.items);
-		assertEquals(TestUtil.setOfItems(new DefaultItem(11, 12)), t5.items);
-		assertEquals(TestUtil.setOfItems(new DefaultItem(11, 12)), t6.items);
-		assertEquals(TestUtil.setOfItems(new DefaultItem(12, 13)), t7.items);
+		assertEquals(TestUtil.setOfItems(new IntValueItem(11, 12)), t5.items);
+		assertEquals(TestUtil.setOfItems(new IntValueItem(11, 12)), t6.items);
+		assertEquals(TestUtil.setOfItems(new IntValueItem(12, 13)), t7.items);
 	}
 
 	@Test
 	public void testAddItem01() {
 		Target t = new Target(10);
 		boolean ret;
-		ret = t.addItem(new DefaultItem(5, 6));
-		assertEquals(TestUtil.setOfItems(new DefaultItem(5, 6)), t.items);
+		ret = t.addItem(new IntValueItem(5, 6));
+		assertEquals(TestUtil.setOfItems(new IntValueItem(5, 6)), t.items);
 		assertTrue(ret);
-		ret = t.addItem(new DefaultItem(3, 4));
+		ret = t.addItem(new IntValueItem(3, 4));
 		assertEquals(TestUtil.setOfItems(
-				new DefaultItem(3, 4), new DefaultItem(5, 6)), t.items);
+				new IntValueItem(3, 4), new IntValueItem(5, 6)), t.items);
 		assertTrue(ret);
-		ret = t.addItem(new DefaultItem(1, 1));
+		ret = t.addItem(new IntValueItem(1, 1));
 		assertEquals(TestUtil.setOfItems(
-				new DefaultItem(3, 4), new DefaultItem(5, 6), new DefaultItem(1, 1)), t.items);
+				new IntValueItem(3, 4), new IntValueItem(5, 6), new IntValueItem(1, 1)), t.items);
 		assertTrue(ret);
-		ret = t.addItem(new DefaultItem(3, 3));
+		ret = t.addItem(new IntValueItem(3, 3));
 		assertEquals(TestUtil.setOfItems(
-				new DefaultItem(3, 4), new DefaultItem(5, 6), new DefaultItem(1, 1)), t.items);
+				new IntValueItem(3, 4), new IntValueItem(5, 6), new IntValueItem(1, 1)), t.items);
 		assertFalse(ret);
 	}
 
@@ -102,22 +100,27 @@ public class AbstractPoolTest {
 		t1.addItem(null);
 	}
 	
+	@Test(expected=IllegalStateException.class)
+	public void testAddItem03() {
+		t8.addItem(new IntValueItem(2, 2));
+	}
+
 	@Test
 	public void testGetItems() {
 		assertEquals(Collections.EMPTY_SET, t1.getItems().collect(Collectors.toSet()));
-		assertEquals(TestUtil.setOfItems(new DefaultItem(11, 12)), t5.getItems().collect(Collectors.toSet()));
-		assertEquals(TestUtil.setOfItems(new DefaultItem(12, 13)), t7.getItems().collect(Collectors.toSet()));
+		assertEquals(TestUtil.setOfItems(new IntValueItem(11, 12)), t5.getItems().collect(Collectors.toSet()));
+		assertEquals(TestUtil.setOfItems(new IntValueItem(12, 13)), t7.getItems().collect(Collectors.toSet()));
 	}
 
 	@Test
 	public void testGetUsedCost() {
 		Target t = new Target(10);
 		assertEquals(0, t.getUsedCost());
-		t.addItem(new DefaultItem(2, 2));
+		t.addItem(new IntValueItem(2, 2));
 		assertEquals(2, t.getUsedCost());
-		t.addItem(new DefaultItem(3, 3));
+		t.addItem(new IntValueItem(3, 3));
 		assertEquals(5, t.getUsedCost());
-		t.addItem(new DefaultItem(7, 7));
+		t.addItem(new IntValueItem(7, 7));
 		assertEquals(5, t.getUsedCost());
 	}
 
@@ -144,5 +147,19 @@ public class AbstractPoolTest {
 		assertFalse(t7.equals(t8));
 		assertFalse(t7.equals(t9));
 		assertFalse(t9.equals(t7));
+	}
+	
+	@Test
+	public void testRemoveAllItems() {
+		Target t = new Target(11);
+		
+		t.addItem(new IntValueItem(11, 12));
+		t.removeAllItems();
+		assertEquals(0, t.getItems().count());
+
+		t.addItem(new IntValueItem(11, 12));
+		t.addItem(new IntValueItem(12, 13));
+		t.removeAllItems();
+		assertEquals(0, t.getItems().count());
 	}
 }

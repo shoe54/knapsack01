@@ -7,9 +7,9 @@ package nz.co.lingo.algos.knapsack01;
  * @author Shu
  *
  */
-public class DefaultItem extends AbstractNumberItem<Integer> {
+public class IntValueItem extends AbstractNumberItem<Integer> {
 
-	public DefaultItem(int cost, Integer value) {
+	public IntValueItem(int cost, Integer value) {
 		super(cost, value);
 		if (cost < 0 || value < 0)
 			throw new IllegalArgumentException("Negative cost or value not allowed");

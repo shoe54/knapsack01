@@ -7,8 +7,8 @@ package nz.co.lingo.algos.knapsack01;
  * @author Shu
  *
  */
-public class DefaultPool extends GenericPool<Integer, Double, DefaultItem> {
-	public DefaultPool(int allowedCost) {
+public class IntValuePool extends GenericPool<Integer, Double, IntValueItem> {
+	public IntValuePool(int allowedCost) {
 		super(allowedCost);
 	}
 

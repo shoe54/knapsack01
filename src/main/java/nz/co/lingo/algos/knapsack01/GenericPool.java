@@ -39,7 +39,6 @@ public class GenericPool<
 	}
 	
 	public void removeAllItems() {
-		// TODO test case
 		items.clear();
 	}
 
@@ -76,7 +75,7 @@ public class GenericPool<
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		GenericPool other = (GenericPool) obj;
+		GenericPool<?, ?, ?> other = (GenericPool<?, ?, ?>) obj;
 		if (allowedCost != other.allowedCost)
 			return false;
 		if (items == null) {

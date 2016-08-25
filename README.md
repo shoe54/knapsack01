@@ -23,7 +23,7 @@ Several examples on using this library are provided, listed in order of increasi
 * A traditional 0/1 knapsack example where `Item` value is the dollar price and cost is the weight. main() is in `nz.co.lingo.algos.knapsack01.examples.knapsack.App`
 * A more complex example. This example is a solution to the problem described at http://geeks.redmart.com/2015/10/26/1000000th-customer-prize-another-programming-challenge/ . main() is at `nz.co.lingo.algos.knapsack01.examples.shopping.App`
 
-An `Item`'s value can be a more complex object instead of just a Number. This is represented by the `ComplexItemValue` interface. This allows the delegation of value comparisons to your own implementations. For simple `Item`s with Integer values the `DefaultItem` and `DefaultPool` classes are provided for convenience. Other items with numeric values can be subclassed from `AbstractNumberItem`. Unless your domain's Pool object already subclasses from another class, `GenericPool` is a sensible default implementation.
+An `Item`'s value can be a more complex object instead of just a Number. This is represented by the `ComplexItemValue` interface. This allows the delegation of value comparisons to your own implementations. For simple `Item`s with Integer values the `IntValueItem` and `IntValuePool` classes are provided for convenience. Other items with numeric values can be subclassed from `AbstractNumberItem`. Unless your domain's Pool object already subclasses from another class, `GenericPool` is a sensible default implementation.
 
 ## Pre-requisites
 

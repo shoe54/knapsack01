@@ -5,7 +5,9 @@ import java.math.BigDecimal;
 import nz.co.lingo.algos.knapsack01.GenericPool;
 
 /**
- * TODO test cases for this class
+ * A knapsack's items are Gears, whose values are BigDecimals to represent
+ * price
+ * 
  * @author Shu
  *
  */

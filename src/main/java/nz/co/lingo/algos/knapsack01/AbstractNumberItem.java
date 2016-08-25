@@ -1,6 +1,12 @@
 package nz.co.lingo.algos.knapsack01;
 
-
+/**
+ * A specialization of Item whose values must be a Number.
+ * 
+ * @author Shu
+ *
+ * @param <IV>
+ */
 public abstract class AbstractNumberItem<IV extends Number & Comparable<? super IV>> implements Item<IV, Double> {
 	int cost;
 	IV value;
@@ -49,7 +55,7 @@ public abstract class AbstractNumberItem<IV extends Number & Comparable<? super 
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		AbstractNumberItem other = (AbstractNumberItem) obj;
+		AbstractNumberItem<?> other = (AbstractNumberItem<?>) obj;
 		if (cost != other.cost)
 			return false;
 		if (value == null) {

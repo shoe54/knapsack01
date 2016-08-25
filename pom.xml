@@ -32,13 +32,6 @@
           			<descriptorRefs>
             			<descriptorRef>jar-with-dependencies</descriptorRef>
           			</descriptorRefs>
-          			<!-- TODO move examples into test only
-			        <archive>
-            			<manifest>
-              				<mainClass>nz.co.lingo.algos.knapsack01.examples.shopping.App</mainClass>
-            			</manifest>
-          			</archive>
-          			 -->
                	</configuration>
 			    <executions>
           			<execution>
@@ -66,7 +59,7 @@
 			<version>1.10.19</version>
 			<scope>test</scope>
 		</dependency>
-		<!-- TODO move this into a test dependency -->
+		<!-- TODO move this into a test dependency or figure out some other way to not require this dependency in the build -->
 		<dependency>
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-csv</artifactId>

@@ -5,8 +5,8 @@ import java.util.stream.Collectors;
 
 import nz.co.lingo.algos.knapsack01.BranchAndBound;
 import nz.co.lingo.algos.knapsack01.BruteForce;
-import nz.co.lingo.algos.knapsack01.DefaultItem;
-import nz.co.lingo.algos.knapsack01.DefaultPool;
+import nz.co.lingo.algos.knapsack01.IntValueItem;
+import nz.co.lingo.algos.knapsack01.IntValuePool;
 import nz.co.lingo.algos.knapsack01.DynamicProgramming;
 
 /**
@@ -18,33 +18,33 @@ import nz.co.lingo.algos.knapsack01.DynamicProgramming;
  *
  */
 public class App {
-	DefaultItem adPlacement01, adPlacement02, adPlacement03;
-	DefaultPool budget;		
+	IntValueItem adPlacement01, adPlacement02, adPlacement03;
+	IntValuePool budget;		
 	
 	public App() {
 		super();
 
 		// Online ad placements
-		adPlacement01 = new DefaultItem(30000, 10000); // $300, 10,000 impressions
-		adPlacement02 = new DefaultItem(40000, 15000); // $400, 15,000 impressions 
-		adPlacement03 = new DefaultItem(55000, 20000); // $550, 20,000 impressions 
+		adPlacement01 = new IntValueItem(30000, 10000); // $300, 10,000 impressions
+		adPlacement02 = new IntValueItem(40000, 15000); // $400, 15,000 impressions 
+		adPlacement03 = new IntValueItem(55000, 20000); // $550, 20,000 impressions 
 		
-		budget = new DefaultPool(40000);
+		budget = new IntValuePool(40000);
 		
 	}
 	
-	public void goBruteForce(DefaultPool budget) {
-		BruteForce<Integer, Double, DefaultItem, DefaultPool> bf = new BruteForce<>();
+	public void goBruteForce(IntValuePool budget) {
+		BruteForce<Integer, Double, IntValueItem, IntValuePool> bf = new BruteForce<>();
 		bf.solve(Arrays.asList(adPlacement01, adPlacement02, adPlacement03), budget);
 	}
 
-	public void goDynamicProgramming(DefaultPool budget) {
-		DynamicProgramming<Integer, Double, DefaultItem, DefaultPool> bf = new DynamicProgramming<>();
+	public void goDynamicProgramming(IntValuePool budget) {
+		DynamicProgramming<Integer, Double, IntValueItem, IntValuePool> bf = new DynamicProgramming<>();
 		bf.solve(Arrays.asList(adPlacement01, adPlacement02, adPlacement03), budget);
 	}
 
-	public void goBranchAndBound(DefaultPool budget) {
-		BranchAndBound<Integer, Double, DefaultItem, DefaultPool> bf = new BranchAndBound<>();
+	public void goBranchAndBound(IntValuePool budget) {
+		BranchAndBound<Integer, Double, IntValueItem, IntValuePool> bf = new BranchAndBound<>();
 		bf.solve(Arrays.asList(adPlacement01, adPlacement02, adPlacement03), budget);
 	}
 	

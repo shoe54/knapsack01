@@ -12,25 +12,25 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-public class DefaultPoolTest {
-	static DefaultPool t1, t2, t3, t4, t5, t6, t7, t8, t9;
+public class IntValuePoolTest {
+	static IntValuePool t1, t2, t3, t4, t5, t6, t7, t8, t9;
 
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
-		t1 = new DefaultPool(10);
-		t2 = new DefaultPool(5);
-		t3 = new DefaultPool(9);
-		t4 = new DefaultPool(9);
-		t5 = new DefaultPool(11);
-		t5.addItem(new DefaultItem(11, 12));
-		t6 = new DefaultPool(11);
-		t6.addItem(new DefaultItem(11, 12));
-		t7 = new DefaultPool(12);
-		t7.addItem(new DefaultItem(12, 13));
-		t8 = new DefaultPool(12);
-		t8.addItem(new DefaultItem(2, 2));
-		t9 = new DefaultPool(19);
-		t9.addItem(new DefaultItem(12, 13));
+		t1 = new IntValuePool(10);
+		t2 = new IntValuePool(5);
+		t3 = new IntValuePool(9);
+		t4 = new IntValuePool(9);
+		t5 = new IntValuePool(11);
+		t5.addItem(new IntValueItem(11, 12));
+		t6 = new IntValuePool(11);
+		t6.addItem(new IntValueItem(11, 12));
+		t7 = new IntValuePool(12);
+		t7.addItem(new IntValueItem(12, 13));
+		t8 = new IntValuePool(12);
+		t8.addItem(new IntValueItem(2, 2));
+		t9 = new IntValuePool(19);
+		t9.addItem(new IntValueItem(12, 13));
 	}
 
 	@Test
@@ -57,29 +57,29 @@ public class DefaultPoolTest {
 		assertEquals(Collections.EMPTY_SET, t2.items);
 		assertEquals(Collections.EMPTY_SET, t3.items);
 		assertEquals(Collections.EMPTY_SET, t4.items);
-		assertEquals(TestUtil.setOfItems(new DefaultItem(11, 12)), t5.items);
-		assertEquals(TestUtil.setOfItems(new DefaultItem(11, 12)), t6.items);
-		assertEquals(TestUtil.setOfItems(new DefaultItem(12, 13)), t7.items);
+		assertEquals(TestUtil.setOfItems(new IntValueItem(11, 12)), t5.items);
+		assertEquals(TestUtil.setOfItems(new IntValueItem(11, 12)), t6.items);
+		assertEquals(TestUtil.setOfItems(new IntValueItem(12, 13)), t7.items);
 	}
 
 	@Test
 	public void testAddItem01() {
-		DefaultPool dpTest = new DefaultPool(10);
+		IntValuePool dpTest = new IntValuePool(10);
 		boolean ret;
-		ret = dpTest.addItem(new DefaultItem(5, 6));
-		assertEquals(TestUtil.setOfItems(new DefaultItem(5, 6)), dpTest.items);
+		ret = dpTest.addItem(new IntValueItem(5, 6));
+		assertEquals(TestUtil.setOfItems(new IntValueItem(5, 6)), dpTest.items);
 		assertTrue(ret);
-		ret = dpTest.addItem(new DefaultItem(3, 4));
+		ret = dpTest.addItem(new IntValueItem(3, 4));
 		assertEquals(TestUtil.setOfItems(
-				new DefaultItem(3, 4), new DefaultItem(5, 6)), dpTest.items);
+				new IntValueItem(3, 4), new IntValueItem(5, 6)), dpTest.items);
 		assertTrue(ret);
-		ret = dpTest.addItem(new DefaultItem(1, 1));
+		ret = dpTest.addItem(new IntValueItem(1, 1));
 		assertEquals(TestUtil.setOfItems(
-				new DefaultItem(3, 4), new DefaultItem(5, 6), new DefaultItem(1, 1)), dpTest.items);
+				new IntValueItem(3, 4), new IntValueItem(5, 6), new IntValueItem(1, 1)), dpTest.items);
 		assertTrue(ret);
-		ret = dpTest.addItem(new DefaultItem(3, 3));
+		ret = dpTest.addItem(new IntValueItem(3, 3));
 		assertEquals(TestUtil.setOfItems(
-				new DefaultItem(3, 4), new DefaultItem(5, 6), new DefaultItem(1, 1)), dpTest.items);
+				new IntValueItem(3, 4), new IntValueItem(5, 6), new IntValueItem(1, 1)), dpTest.items);
 		assertFalse(ret);
 	}
 
@@ -90,22 +90,22 @@ public class DefaultPoolTest {
 
 	@Test
 	public void testGetUsedCost() {
-		DefaultPool dpTest = new DefaultPool(10);
+		IntValuePool dpTest = new IntValuePool(10);
 		assertEquals(0, dpTest.getUsedCost());
-		dpTest.addItem(new DefaultItem(2, 2));
+		dpTest.addItem(new IntValueItem(2, 2));
 		assertEquals(2, dpTest.getUsedCost());
-		dpTest.addItem(new DefaultItem(3, 3));
+		dpTest.addItem(new IntValueItem(3, 3));
 		assertEquals(5, dpTest.getUsedCost());
-		dpTest.addItem(new DefaultItem(7, 7));
+		dpTest.addItem(new IntValueItem(7, 7));
 		assertEquals(5, dpTest.getUsedCost());
 	}
 
 	@Test
 	public void testGetValueToCostRatioComparator() {
-		Comparator<DefaultItem> comparator = t1.getValueToCostRatioComparator();
-		assertEquals(0, comparator.compare(new DefaultItem(11, 12), new DefaultItem(11, 12)));
-		assertTrue(comparator.compare(new DefaultItem(11, 13), new DefaultItem(11, 12)) > 0);
-		assertTrue(comparator.compare(new DefaultItem(11, 11), new DefaultItem(11, 12)) < 0);
+		Comparator<IntValueItem> comparator = t1.getValueToCostRatioComparator();
+		assertEquals(0, comparator.compare(new IntValueItem(11, 12), new IntValueItem(11, 12)));
+		assertTrue(comparator.compare(new IntValueItem(11, 13), new IntValueItem(11, 12)) > 0);
+		assertTrue(comparator.compare(new IntValueItem(11, 11), new IntValueItem(11, 12)) < 0);
 	}
 
 	@Test
@@ -122,8 +122,8 @@ public class DefaultPoolTest {
 	@Test
 	public void testGetItems() {
 		assertEquals(Collections.EMPTY_SET, t1.getItems().collect(Collectors.toSet()));
-		assertEquals(TestUtil.setOfItems(new DefaultItem(11, 12)), t5.getItems().collect(Collectors.toSet()));
-		assertEquals(TestUtil.setOfItems(new DefaultItem(12, 13)), t7.getItems().collect(Collectors.toSet()));
+		assertEquals(TestUtil.setOfItems(new IntValueItem(11, 12)), t5.getItems().collect(Collectors.toSet()));
+		assertEquals(TestUtil.setOfItems(new IntValueItem(12, 13)), t7.getItems().collect(Collectors.toSet()));
 	}
 
 	@Test

@@ -19,23 +19,23 @@ public class BruteForce<
 		P extends Pool<IV, IVD, I>>
 	extends Solver<IV, IVD, I, P> {
 	/**
-	 * Iterate thru all possible combinations of products in the tote. A
-	 * combination is represented as a series of bits where 0 means the product
-	 * is not included and 1 means the product is included. A BigInteger is used
+	 * Iterate thru all possible combinations of items in the pool. A
+	 * combination is represented as a series of bits where 0 means the item
+	 * is not included and 1 means the item is included. A BigInteger is used
 	 * to hold this series of bits since it can hold and operate on a large number
 	 * if bits
 	 * 
 	 * We keep track of which combination has the highest value. At the end of
 	 * the iteration this gives us the best solution possible.
 	 * 
-	 * n = number of products number of possible combinations = (2 power n) - 1
+	 * n = number of items number of possible combinations = (2 power n) - 1
 	 * number of bits required to represent a combination = n
 	 *
 	 * @param items
-	 * @param tote
+	 * @param pool
 	 */
 	@Override
-	protected void doSolve(List<I> items, P tote) {
+	protected void doSolve(List<I> items, P pool) {
 		IV combinationValue;
 		int combinationCost;
 		BigInteger bestCombination = null;
@@ -57,7 +57,7 @@ combinationIteration:
 					I itemAtBit = items.get(bitIndex);
 					combinationValue = itemAtBit.addValue(combinationValue);
 					combinationCost += itemAtBit.getCost();
-					if (combinationCost > tote.getAllowedCost())
+					if (combinationCost > pool.getAllowedCost())
 						// Solution is not feasible already at this point. Skip this combination
 						continue combinationIteration; 
 				}
@@ -70,11 +70,11 @@ combinationIteration:
 			}
 		}
 		
-		// Add products from best combination into tote
+		// Add items from best combination into pool
 		for (int bitIndex = 0; bitIndex < items.size(); bitIndex++) {
 			if (bestCombination.testBit(bitIndex)) {
-				I productAtBit = items.get(bitIndex);
-				tote.addItem(productAtBit);
+				I itemAtBit = items.get(bitIndex);
+				pool.addItem(itemAtBit);
 			}
 		}
 	}

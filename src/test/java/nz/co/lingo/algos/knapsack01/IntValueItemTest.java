@@ -8,15 +8,15 @@ import static org.junit.Assert.assertTrue;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-public class DefaultItemTest {
-	static DefaultItem t1, t2, t3, t4;
+public class IntValueItemTest {
+	static IntValueItem t1, t2, t3, t4;
 
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
-		t1 = new DefaultItem(10, 5);
-		t2 = new DefaultItem(5, 10);
-		t3 = new DefaultItem(9, 9);
-		t4 = new DefaultItem(9, 9);
+		t1 = new IntValueItem(10, 5);
+		t2 = new IntValueItem(5, 10);
+		t3 = new IntValueItem(9, 9);
+		t4 = new IntValueItem(9, 9);
 	}
 
 	@Test
@@ -40,17 +40,17 @@ public class DefaultItemTest {
 
 	@Test(expected=IllegalArgumentException.class)
 	public void testDefaultItem02() {
-		new DefaultItem(9, null);
+		new IntValueItem(9, null);
 	}
 
 	@Test(expected=IllegalArgumentException.class)
 	public void testDefaultItem03() {
-		new DefaultItem(-1, 1);
+		new IntValueItem(-1, 1);
 	}
 
 	@Test(expected=IllegalArgumentException.class)
 	public void testDefaultItem04() {
-		new DefaultItem(1, -1);
+		new IntValueItem(1, -1);
 	}
 
 	@Test
@@ -128,7 +128,7 @@ public class DefaultItemTest {
 
 	@Test(expected=ArithmeticException.class)
 	public void testMultiplyValue02() {
-		new DefaultItem(10, 999999999).multiplyValue(99999999);
+		new IntValueItem(10, 999999999).multiplyValue(99999999);
 	}
 
 	@Test
